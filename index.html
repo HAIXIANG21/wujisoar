@@ -1,147 +1,208 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSSIDOL Smart Devices - 2026 New Arrivals</title>
-    <style>
-        /* === 重置与基础样式保持不变 === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
-        
-        /* === 头部样式保持不变 === */
-        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1400px; margin: 0 auto; }
-        .logo { font-size: 28px; font-weight: bold; letter-spacing: 1px; }
-        .logo span { color: #ffd700; }
-        nav ul { display: flex; list-style: none; gap: 30px; }
-        nav a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 16px; }
-        nav a:hover { color: #ffd700; }
-        
-        /* === 英雄区域 (Hero) 修改了标题 === */
-        .hero { margin-top: 80px; background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><path fill="%23ddd" d="M0 300h1200v300H0z"/></svg>'); background-size: cover; background-position: center; color: white; text-align: center; padding: 120px 20px; }
-        .hero h1 { font-size: 48px; margin-bottom: 20px; animation: fadeInUp 1s ease; }
-        .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
-        .btn { display: inline-block; padding: 15px 40px; background: #ffd700; color: #1e3c72; text-decoration: none; border-radius: 50px; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.4s both; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* === 通用区块样式保持不变 === */
-        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 36px; color: #1e3c72; margin-bottom: 15px; position: relative; }
-        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #ffd700; margin: 15px auto; border-radius: 2px; }
-        .section-subtitle { text-align: center; color: #666; font-size: 18px; margin-bottom: 50px; }
-        
-        /* === 产品网格样式保持不变 === */
-        #products { background: white; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .product-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-        
-        /* 产品图片容器 - 现在支持具体颜色 */
-        .product-image { width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; background-size: cover; background-position: center; }
-        
-        .product-info { padding: 25px; }
-        .product-info h3 { color: #1e3c72; margin-bottom: 10px; font-size: 22px; }
-        .product-info p { color: #666; margin-bottom: 15px; }
-        .product-specs { list-style: none; margin-bottom: 20px; }
-        .product-specs li { padding: 5px 0; color: #555; font-size: 14px; }
-        .product-specs li::before { content: '✓ '; color: #ffd700; font-weight: bold; }
-        
-        /* === 目录下载区域保持不变 === */
-        #catalog { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; text-align: center; border-radius: 20px; margin: 40px auto; padding: 60px 40px; }
-        #catalog .section-title { color: white; }
-        #catalog .section-title::after { background: #ffd700; }
-        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .catalog-item { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
-        .catalog-icon { font-size: 48px; margin-bottom: 15px; }
-        .catalog-item h3 { margin-bottom: 10px; font-size: 20px; }
-        .download-btn { display: inline-block; margin-top: 15px; padding: 12px 30px; background: #ffd700; color: #1e3c72; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s; }
-        .download-btn:hover { background: #ffed4e; transform: scale(1.05); }
-        
-        /* === 联系方式区域保持不变 === */
-        #contact { background: white; }
-        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-        .contact-info { padding: 20px; }
-        .contact-item { display: flex; align-items: flex-start; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; transition: transform 0.3s; }
-        .contact-item:hover { transform: translateX(10px); }
-        .contact-icon { font-size: 30px; margin-right: 20px; color: #1e3c72; }
-        .contact-details h3 { color: #1e3c72; margin-bottom: 5px; }
-        .contact-details p { color: #666; }
-        
-        .message-board { background: #f8f9fa; padding: 30px; border-radius: 15px; }
-        .message-board h3 { color: #1e3c72; margin-bottom: 20px; font-size: 24px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: 500; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; transition: border-color 0.3s; font-family: inherit; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #1e3c72; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .submit-btn { width: 100%; padding: 15px; background: #1e3c72; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-        .submit-btn:hover { background: #2a5298; }
-        
-        /* === 底部样式保持不变 === */
-        footer { background: #1a1a2e; color: white; padding: 50px 5% 20px; }
-        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px; }
-        .footer-section h3 { color: #ffd700; margin-bottom: 20px; }
-        .footer-section p, .footer-section a { color: #aaa; text-decoration: none; line-height: 2; }
-        .footer-section a:hover { color: #ffd700; }
-        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; color: #666; }
-        
-        /* === 响应式保持不变 === */
-        @media (max-width: 768px) { 
-            .header-top { flex-direction: column; gap: 15px; }
-            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 32px; }
-            .contact-container { grid-template-columns: 1fr; }
-            .section-title { font-size: 28px; } 
-        }
-    </style>
-</head>
-<body>
-    <!-- 头部 -->
-    <header>
-        <div class="header-top">
-            <div class="logo">RSSIDOL<span>SMART</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#catalog">Catalog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- 英雄区域 -->
-    <section class="hero" id="home">
-        <h1>2026 New Bluetooth Speaker Series</h1>
-        <p>Smart Audio & IoT Solutions | Waterproof & Shockproof | Global Shipping</p>
-        <a href="#products" class="btn">Explore Products</a>
-    </section>
+<!DOCTYPE html> Customizable Smart Audio Solutions
+ <div class="logo">RSSIDOL<span>SMART</span></div>
+ <nav>
+ <ul>
+ <li><a href="#home">Home</a></li>
+ <li><a href="#products">Products</a></li>
+ <li><a href="#customization">Customization</a></li> <li><a href="#contact">Contact</a></li>
+ </ul>
+ </nav>
+ </div>
+</header>
+<!-- 英雄区域 -->
+<section class="hero" id="home">
+	 <h1>Customizable Smart Audio Solutions</h1>
+	 <p>Custom Logo • Pattern Design • Color Options • OEM/ODM Services</p>	 <a href="#customization" class="btn">Start Customization</a> 
+</section>
+<!-- 产品区域 -->
+<section id="products">
+	 <h2 class="section-title">Product Range</h2>
+	 <p class="section-subtitle">Our standard product line with full customization options</p>
+ <div class="products-grid">
+ <!-- 产品 1: 基础款 -->
+ <div class="product-card">
+	 <div class="product-image" style="background: #000;">	 <!-- 图片需替换 -->
+ </div>
+ <div class="product-info">
+ <h3>Standard Smart Speaker</h3>
+ <p>Classic design with excellent sound quality. Fully customizable.</
+p>
+ <ul class="product-specs">
+ <li>Bluetooth Version: 5.3</li>
+ <li>Battery Life: Up to 10 hours</li>
+ <li>Feature: Voice Assistant Control</li>
+ </ul>
+ </div>
+ </div>
+ <!-- 产品 2: 户外款 -->
+ <div class="product-card">
+	 <div class="product-image" style="background: #E0F7FA;">	 <!-- 图片需替换 -->
+ </div>
+ <div class="product-info">
+ <h3>Outdoor Smart Speaker</h3>
+ <p>Waterproof and shockproof design for outdoor use. Custom colors 
+available.</p>
+ <ul class="product-specs">
+ <li>Bluetooth Version: 5.3</li>
+ <li>Battery Life: Up to 12 hours</li>
 
-    <!-- 产品区域 (核心修改部分) -->
-    <section id="products">
-        <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">High-quality smart audio devices based on your design</p>
-        <div class="products-grid">
-            
-            <!-- 产品 1: 黑色款 -->
-            <div class="product-card">
-                <!-- 这里使用了背景色模拟黑色款，实际使用时请替换为PDF中提取的图片 -->
-                <div class="product-image" style="background: #000 url('data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><text y=&quot;50%&quot; font-size=&quot;20&quot; fill=&quot;rgba(255,255,255,0.2)&quot; text-anchor=&quot;middle&quot;>&#9679;</text></svg>') center/50% no-repeat;">
-                    <!-- 图片需替换：黑色款 -->
-                </div>
-                <div class="product-info">
-                    <h3>Smart Speaker - Black</h3>
-                    <p>Classic black finish with metallic ring. Perfect for indoor and home use.</p>
-                    <ul class="product-specs">
-                        <li>Bluetooth Version: 5.3</li>
-                        <li>Battery Life: Up to 10 hours</li>
-                        <li>Feature: Voice Assistant Control</li>
-                    </ul>
-                </div>
-            </div>
 
-            <!-- 产品 2: 浅青色款 -->
-            <div class="pr
+ <li>Feature: IPX7 Waterproof</li>
+ </ul>
+ </div>
+ </div>
+ <!-- 产品 3: 车载款 -->
+ <div class="product-card">
+	 <div class="product-image" style="background: #E1BEE7;">	 <!-- 图片需替换 -->
+ </div>
+ <div class="product-info">
+ <h3>Bike Mount Speaker</h3>
+ <p>Special edition with handlebar mount. Includes display 
+customization.</p>
+ <ul class="product-specs">
+ <li>Bluetooth Version: 5.3</li>
+ <li>Battery Life: Up to 10 hours</li>
+ <li>Feature: Built-in Display & Mount</li>
+ </ul>
+ </div>
+ </div>
+ <!-- 产品 4: 高端款 -->
+ <div class="product-card">
+	 <div class="product-image" style="background: #FFF8E1;">	 <!-- 图片需替换 -->
+ </div>
+ <div class="product-info">
+ <h3>Premium Smart Speaker</h3>
+ <p>Elegant design with premium materials. Full branding options.</p> <ul class="product-specs">
+ <li>Bluetooth Version: 5.3</li>
+ <li>Battery Life: Up to 15 hours</li>
+ <li>Feature: 360° Surround Sound</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- 定制服务区域 -->
+<section id="customization">
+	 <h2 class="section-title">Customization Services</h2>
+	 <p class="section-subtitle">We offer comprehensive customization options for all products</p>
+ <div class="customization-grid">
+ <!-- 定制服务 1: LOGO加印 -->
+ <div class="custom-service">
+ <div class="custom-icon">🏷️</div>
+ <h3>Logo Printing</h3>
+ <p>Custom logo printing on product surface using various techniques 
+including silk printing, laser engraving, and heat transfer.</p>
+ </div>
+
+
+ <!-- 定制服务 2: 图案设计 -->
+ <div class="custom-service">
+ <div class="custom-icon">🎨</div>
+ <h3>Pattern Design</h3>
+ <p>Custom pattern and artwork design. We can reproduce any design or 
+create new ones based on your requirements.</p>
+ </div>
+ <!-- 定制服务 3: 颜色定制 -->
+ <div class="custom-service">
+ <div class="custom-icon">🌈</div>
+ <h3>Color Options</h3>
+ <p>Choose from standard colors or provide Pantone codes for exact color 
+matching. We support single color and multi-color options.</p>
+ </div>
+ <!-- 定制服务 4: OEM/ODM -->
+ <div class="custom-service">
+ <div class="custom-icon">🏭</div>
+ <h3>OEM/ODM Services</h3>
+ <p>Full OEM/ODM services from product design to manufacturing. We help 
+bring your ideas to life with professional engineering support.</p>
+ </div>
+ </div>
+</section>
+<!-- 联系方式 -->
+<section id="contact">
+	 <h2 class="section-title">Contact Us</h2>
+	 <p class="section-subtitle">Get in touch for customization inquiries and business cooperation</p>
+ <div class="contact-container">
+ <div class="contact-info">
+ <div class="contact-item">
+ <div class="contact-icon">📞</div>
+ <div class="contact-details">
+ <h3>Phone</h3>
+ <p>+86 123 4567 8900</p>
+ </div>
+ </div>
+ <div class="contact-item">
+ <div class="contact-icon">📧</div>
+ <div class="contact-details">
+ <h3>Email</h3>
+ <p>customization@rssidol.com</p>
+ </div>
+ </div>
+ <div class="contact-item">
+ <div class="contact-icon">🏢</div>
+ <div class="contact-details">
+ <h3>Address</h3>
+ <p>Shenzhen, Guangdong, China</p>
+ </div>
+ </div>
+ </div>
+
+
+ <div class="message-board">
+ <h3>Send Us a Message</h3>
+ <form>
+ <div class="form-group">
+ <label for="name">Your Name</label>
+ <input type="text" id="name" placeholder="Enter your name" 
+required>
+ </div>
+ <div class="form-group">
+ <label for="email">Email Address</label>
+ <input type="email" id="email" placeholder="Enter your email" 
+required>
+ </div>
+ <div class="form-group">
+	 <label for="company">Company Name</label>
+	 <input type="text" id="company" placeholder="Enter company name"> </div>
+ <div class="form-group">
+ <label for="service">Service Required</label>
+ <select id="service">
+ <option value="logo">Logo Printing</option>
+ <option value="design">Pattern Design</option>
+ <option value="color">Color Customization</option>
+ <option value="oem">OEM/ODM Service</option>
+ <option value="other">Other</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label for="message">Your Message</label>
+ <textarea id="message" placeholder="Tell us about your 
+customization requirements..." required></textarea>
+	 </div>
+	 <button type="submit" class="submit-btn">Send Message</button> </form>
+ </div>
+ </div>
+</section>
+<!-- 底部 -->
+<footer>
+ <div class="footer-content">
+ <div class="footer-section">
+ <h3>About Us</h3>
+ <p>We are a professional smart audio solutions provider specializing in 
+customized products for global clients.</p>
+ </div>
+ <div class="footer-section">
+ <h3>Quick Links</h3>
+ <p><a href="#home">Home</a></p>
+ <p><a href="#products">Products</a></p>
+ <p><a href="#customization">Customization</a></p>
+ <p><a href="#contact">Contact</a></p>
+ </div>
+ <div class="footer-section">
+ <h3>Contact Info</h丈>
+ <p>Phone: +86 123 4567 8900</p>
+
+
+ <p>Email: info@rssidol.com</p>
+ <p>Address: Shenzhen, China
