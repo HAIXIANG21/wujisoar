@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wuji Soar - Smart Audio & Lighting Solutions</title>
+    <title>Wuji Soar - Smart Audio & Lighting</title>
     <style>
-        /* === 保持原有CSS样式不变 (渐变色/布局/动画) === */
+        /* === 保持原有基础样式不变 === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
+        
+        /* ... (中间的 header, hero CSS 保持不变) ... */
         
         /* Header */
         header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -31,14 +33,47 @@
         .section-title { text-align: center; font-size: 36px; color: #1e3c72; margin-bottom: 15px; position: relative; }
         .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #ffd700; margin: 15px auto; border-radius: 2px; }
         .section-subtitle { text-align: center; color: #666; font-size: 18px; margin-bottom: 50px; }
-        
-        /* Products */
+
+        /* === 修改后的 Products CSS (支持滚动) === */
         #products { background: white; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .product-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        
+        /* 1. 容器样式：强制横向滚动 */
+        .products-grid {
+            display: flex; /* 改为 Flex 布局 */
+            overflow-x: auto; /* 启用横向滚动条 */
+            gap: 30px; /* 项目间距 */
+            padding-bottom: 20px; /* 底部留白，防止滚动条遮挡阴影 */
+            scrollbar-width: thin; /* Firefox: 滚动条变细 */
+            -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
+        }
+        
+        /* 2. 隐藏滚动条 (视觉更干净) */
+        .products-grid::-webkit-scrollbar {
+            display: none; /* Chrome/Safari: 隐藏滚动条 */
+        }
+        
+        /* 3. 产品卡片：固定宽度，不压缩 */
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 0 0 300px; /* 关键：不增长、不收缩、基础宽度300px */
+            cursor: grab; /* 手型光标提示可拖拽 */
+        }
+        
+        .product-card:active {
+            cursor: grabbing;
+            transform: scale(0.98); /* 按下时轻微缩小 */
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
         .product-image { width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; }
-        /* 音响使用深蓝/紫色渐变，台灯使用暖黄/橙色渐变以作区分 */
         .audio-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .light-bg { background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%); } 
         .product-info { padding: 25px; }
@@ -47,6 +82,8 @@
         .product-specs { list-style: none; margin-bottom: 20px; }
         .product-specs li { padding: 5px 0; color: #555; font-size: 14px; }
         .product-specs li::before { content: '✓ '; color: #ffd700; font-weight: bold; }
+        
+        /* ... (其余 Catalog, Contact, Footer CSS 保持不变) ... */
         
         /* Catalog Download */
         #catalog { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; text-align: center; border-radius: 20px; margin: 40px auto; padding: 60px 40px; }
@@ -102,7 +139,6 @@
     <!-- Header -->
     <header>
         <div class="header-top">
-            <!-- 1. 修改Logo名称为 Wuji Soar -->
             <div class="logo">WUJI <span>SOAR</span></div>
             <nav>
                 <ul>
@@ -117,64 +153,70 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>Innovative Audio & Smart Lighting</h1>
-        <p>Premium Bluetooth Speakers & Modern LED Lamps | Designed in Shenzhen | Global Shipping</p>
+        <h1>Immersive Sound & Smart Lighting</h1>
+        <p>Premium Bluetooth Speakers & Modern LED Lamps | Designed in Shenzhen</p>
         <a href="#products" class="btn">Explore Products</a>
     </section>
 
-    <!-- Products Section -->
+    <!-- Products Section (4 items with Scroll) -->
     <section id="products">
         <h2 class="section-title">Our Products</h2>
         <p class="section-subtitle">High-fidelity sound and ambient lighting solutions</p>
+        
+        <!-- 滚动容器 -->
         <div class="products-grid">
-            <!-- 产品 1: 蓝牙音响 -->
+            <!-- Item 1 -->
             <div class="product-card">
-                <div class="product-image audio-bg">
-                    <!-- 这里可以替换成实际的图片标签 <img src="speaker.jpg" alt="..."> -->
-                    Speaker Image
-                </div>
+                <div class="product-image audio-bg">Bluetooth Speaker X1</div>
                 <div class="product-info">
-                    <h3>Wireless Bluetooth Speaker X1</h3>
-                    <p>Premium portable speaker with 360° surround sound and 20-hour playtime. Perfect for outdoor and indoor use.</p>
+                    <h3>Premium Portable Speaker</h3>
+                    <p>Crystal clear 360° sound with deep bass. IPX7 waterproof for pool parties.</p>
                     <ul class="product-specs">
-                        <li>Battery Life: 20 Hours</li>
-                        <li>Bluetooth Version: 5.3</li>
-                        <li>Waterproof: IPX7</li>
-                        <li>Material: Aluminum Alloy</li>
+                        <li>Battery: 20H Playtime</li>
+                        <li>BT Version: 5.3</li>
+                        <li>Feature: RGB Lights</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 产品 2: 智能台灯 -->
+            <!-- Item 2 -->
             <div class="product-card">
-                <div class="product-image light-bg">
-                    Lamp Image
-                </div>
+                <div class="product-image light-bg">Smart Lamp S2</div>
                 <div class="product-info">
-                    <h3>Smart LED Desk Lamp S2</h3>
-                    <p>Eye-care adjustable lamp with smart touch control and wireless charging pad. Reduces eye strain during long work hours.</p>
+                    <h3>Eye-Care Desk Lamp</h3>
+                    <p>Adjustable gooseneck with wireless charging. Protects eyes during night work.</p>
                     <ul class="product-specs">
-                        <li>Light Modes: Warm/Cool/RGB</li>
-                        <li>Adjustable: 360° Flexible Neck</li>
-                        <li>Features: Wireless Charging, USB Port</li>
-                        <li>Material: ABS + Silicone</li>
+                        <li>Light: Warm/Cool/RGB</li>
+                        <li>Feature: Qi Charging</li>
+                        <li>Material: Metal+Silicone</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 产品 3: 旗舰音响 (可选) -->
+            <!-- Item 3 (新增第3个栏目) -->
             <div class="product-card">
-                <div class="product-image audio-bg">
-                    Speaker Image 3
-                </div>
+                <div class="product-image audio-bg">Soundbar Z3</div>
                 <div class="product-info">
-                    <h3>Home Theater Soundbar Z3</h3>
-                    <p>Immersive cinematic audio experience for your living room. Equipped with subwoofer for deep bass.</p>
+                    <h3>Home Theater Soundbar</h3>
+                    <p>Surround sound experience with subwoofer. Perfect for movies and gaming.</p>
                     <ul class="product-specs">
-                        <li>Power Output: 120W</li>
-                        <li>Connectivity: HDMI, Optical, AUX</li>
-                        <li>Dimensions: 1000 x 80 x 60 mm</li>
+                        <li>Power: 120W</li>
+                        <li>Connect: HDMI/Optical</li>
                         <li>Warranty: 2 Years</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Item 4 (新增第4个栏目) -->
+            <div class="product-card">
+                <div class="product-image light-bg">Bedroom Light M4</div>
+                <div class="product-info">
+                    <h3>Atmosphere Smart Light</h3>
+                    <p>App-controlled RGBIC lighting strip. Syncs with music for immersive gaming.</p>
+                    <ul class="product-specs">
+                        <li>Control: App/Voice</li>
+                        <li>Effect: 16 Million Colors</li>
+                        <li>Usage: Bedroom/Gaming</li>
                     </ul>
                 </div>
             </div>
@@ -184,91 +226,73 @@
     <!-- Catalog Download -->
     <section id="catalog">
         <h2 class="section-title">Download Catalog</h2>
-        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Get detailed product specifications and technical documentation</p>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Get detailed product specifications</p>
         <div class="catalog-grid">
             <div class="catalog-item">
-                <div class="catalog-icon">📄</div>
-                <h3>Audio Products 2024</h3>
-                <p>Speakers and Soundbars Specifications</p>
+                <div class="catalog-icon">🎵</div>
+                <h3>Audio Catalog 2024</h3>
+                <p>Speakers and Soundbars</p>
                 <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
             <div class="catalog-item">
                 <div class="catalog-icon">💡</div>
-                <h3>Lighting Solutions</h3>
-                <p>Lamps and Smart Lighting Guides</p>
+                <h3>Lighting Catalog</h3>
+                <p>Lamps and Lighting Strips</p>
                 <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
             <div class="catalog-item">
                 <div class="catalog-icon">📱</div>
-                <h3>Company Brochure</h3>
-                <p>Wuji Soar Profile & Certifications</p>
+                <h3>Company Profile</h3>
+                <p>OEM/ODM Services & Certifications</p>
                 <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Message Board -->
+    <!-- Contact -->
     <section id="contact">
         <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">Get in touch for inquiries and quotations</p>
+        <p class="section-subtitle">Get in touch for inquiries</p>
         <div class="contact-container">
             <div class="contact-info">
                 <div class="contact-item">
                     <div class="contact-icon">🏢</div>
                     <div class="contact-details">
-                        <h3>Headquarters</h3>
-                        <!-- 2. 更新地址为深圳 -->
-                        <p>Shenzhen High-Tech Industrial Park<br>Shenzhen, Guangdong 518000</p>
+                        <h3>Factory Address</h3>
+                        <p>Shenzhen, Guangdong 518000</p>
                     </div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">📞</div>
                     <div class="contact-details">
                         <h3>Phone/WhatsApp</h3>
-                        <p>Tel: +86-755-XXXX-XXXX<br>Mobile: +86 138 XXXX XXXX</p>
+                        <p>+86 138 XXXX XXXX</p>
                     </div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">✉️</div>
                     <div class="contact-details">
-                        <h3>Email Address</h3>
-                        <p>Sales: sales@wujisoar.com<br>Support: support@wujiso
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🕐</div>
-                    <div class="contact-details">
-                        <h3>Business Hours</h3>
-                        <p>Monday - Saturday: 9:00 AM - 6:00 PM (GMT+8)</p>
+                        <h3>Email</h3>
+                        <p>Sales: sales@wujisoar.com</p>
                     </div>
                 </div>
             </div>
             <div class="message-board">
-                <h3>Send us a Message</h3>
-                <!-- 3. 修复了原代码中截断的 form 标签 -->
-                <form onsubmit="alert('Message sent!'); return false;">
+                <h3>Send Message</h3>
+                <form onsubmit="alert('Sent!'); return false;">
                     <div class="form-group">
-                        <label for="name">Your Name *</label>
-                        <input type="text" id="name" required placeholder="John Smith">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" required placeholder="john@company.com">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="product">Interested Product</label>
-                        <select id="product">
-                            <option value="">Select a product</option>
-                            <option value="speaker">Bluetooth Speaker</option>
-                            <option value="lamp">Smart Lamp</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="4"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Your Message *</label>
-                        <textarea id="message" required placeholder="Hi, I would like to know more about..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="submit-btn">Send Inquiry</button>
                 </form>
             </div>
         </div>
@@ -278,21 +302,19 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>About Wuji Soar</h3>
-                <p>Innovating the future of audio and lighting technology. We combine sleek design with powerful performance.</p>
+                <h3>WUJI SOAR</h3>
+                <p>Your trusted partner for audio and lighting solutions in Shenzhen.</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <p><a href="#home">Home</a></p>
                 <p><a href="#products">Products</a></p>
                 <p><a href="#catalog">Catalog</a></p>
-                <p><a href="#contact">Contact</a></p>
             </div>
             <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p>Shenzhen, Guangdong, China</p>
+                <h3>Contact</h3>
                 <p>Email: sales@wujisoar.com</p>
-                <p>Phone: +86-755-XXXX-XXXX</p>
+                <p>Phone: +86 138 XXXX XXXX</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -301,10 +323,20 @@
     </footer>
 
     <script>
-        function handleSubmit(e) {
-            e.preventDefault();
-            alert('Thanks for your message! We will reply within 24 hours.');
-        }
-    </script>
-</body>
-</html>
+        // 简单的拖拽滚动逻辑 (增强鼠标操作体验)
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        const slider = document.querySelector('.products-grid');
+        
+        if(slider) {
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('active');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+            
+            slider.addEventListener('mouseleave', () => {
+                is
