@@ -1,65 +1,356 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>信息收集表单</title>
+    <title>Sunrise Industrial Co., Ltd. - Professional Manufacturer & Exporter</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', 'Microsoft Yahei', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
-            padding: 20px;
         }
-        
-        .container {
-            max-width: 800px;
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        h1 {
-            text-align: center;
-            color: #1e3c72;
-            margin-bottom: 30px;
+
+        .logo {
             font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
-        
-        .time-location {
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><path fill="%23ddd" d="M0 300h1200v300H0z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #ffd700;
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ffd700;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 30px;
-            padding: 10px;
-            background: #f0f0f0;
-            border-radius: 5px;
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+
+        /* Products */
+        #products {
+            background: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .product-specs {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .product-specs li {
+            padding: 5px 0;
+            color: #555;
             font-size: 14px;
         }
-        
+
+        .product-specs li::before {
+            content: '✓ ';
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        /* Catalog Download */
+        #catalog {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 40px auto;
+            padding: 60px 40px;
+        }
+
+        #catalog .section-title {
+            color: white;
+        }
+
+        #catalog .section-title::after {
+            background: #ffd700;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .catalog-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .catalog-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .catalog-item h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: #ffd700;
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #ffed4e;
+            transform: scale(1.05);
+        }
+
+        /* Contact */
+        #contact {
+            background: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            padding: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 30px;
+            margin-right: 20px;
+            color: #1e3c72;
+        }
+
+        .contact-details h3 {
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p {
+            color: #666;
+        }
+
+        /* Message Board */
+        .message-board {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .message-board h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
-        
-        label {
+
+        .form-group label {
             display: block;
             margin-bottom: 8px;
             color: #333;
             font-weight: 500;
         }
-        
-        input[type="text"],
-        input[type="email"],
-        select,
-        textarea {
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -68,14 +359,19 @@
             transition: border-color 0.3s;
             font-family: inherit;
         }
-        
-        input:focus,
-        select:focus,
-        textarea:focus {
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #1e3c72;
         }
-        
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 15px;
@@ -87,130 +383,226 @@
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
-            margin-top: 10px;
         }
-        
+
         .submit-btn:hover {
             background: #2a5298;
         }
-        
-        .success-message {
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 50px 5% 20px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
             text-align: center;
-            color: #28a745;
-            margin-top: 20px;
-            font-weight: bold;
-            display: none;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>用户信息反馈表单</h1>
+
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="logo">SUNRISE<span>IND</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#catalog">Catalog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Professional Manufacturing & Export Solutions</h1>
+        <p>15+ Years of Excellence in Industrial Equipment | ISO 9001 Certified | Global Shipping</p>
+        <a href="#products" class="btn">Explore Products</a>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">High-quality industrial solutions for global markets</p>
         
-        <!-- 时间地点信息显示 -->
-        <div class="time-location">
-            <strong>当前时间：</strong><span id="current-time">2026-05-26 星期二</span> |
-            <strong>当前地点：</strong><span id="current-location">广东省 深圳市</span>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">Product Image 1</div>
+                <div class="product-info">
+                    <h3>Industrial Pump Series A</h3>
+                    <p>High-efficiency centrifugal pumps designed for heavy-duty applications in chemical and petroleum industries.</p>
+                    <ul class="product-specs">
+                        <li>Flow Rate: 100-5000 m³/h</li>
+                        <li>Material: Stainless Steel 316</li>
+                        <li>Certification: CE, ISO 9001</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">Product Image 2</div>
+                <div class="product-info">
+                    <h3>Precision Valve System</h3>
+                    <p>Advanced control valves with smart automation capabilities for precise flow management.</p>
+                    <ul class="product-specs">
+                        <li>Pressure Rating: PN16-PN40</li>
+                        <li>Temperature Range: -40°C to 450°C</li>
+                        <li>Actuator Type: Electric/Pneumatic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">Product Image 3</div>
+                <div class="product-info">
+                    <h3>Heat Exchanger Unit</h3>
+                    <p>Compact and efficient heat exchange solutions for HVAC and industrial processing systems.</p>
+                    <ul class="product-specs">
+                        <li>Capacity: 50-2000 kW</li>
+                        <li>Plate Material: Titanium/SS304</li>
+                        <li>Efficiency: Up to 95%</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <form id="info-form">
-            <!-- 姓名 -->
-            <div class="form-group">
-                <label for="name">姓名 *</label>
-                <input type="text" id="name" placeholder="请输入您的姓名" required>
+    <!-- Catalog Download -->
+    <section id="catalog">
+        <h2 class="section-title">Download Catalog</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Get detailed product specifications and technical documentation</p>
+        
+        <div class="catalog-grid">
+            <div class="catalog-item">
+                <div class="catalog-icon">📄</div>
+                <h3>Product Catalog 2024</h3>
+                <p>Complete product range with specifications</p>
+                <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
-
-            <!-- 邮箱 -->
-            <div class="form-group">
-                <label for="email">邮箱地址 *</label>
-                <input type="email" id="email" placeholder="请输入您的邮箱" required>
+            
+            <div class="catalog-item">
+                <div class="catalog-icon">📊</div>
+                <h3>Technical Manual</h3>
+                <p>Detailed installation and operation guides</p>
+                <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
-
-            <!-- 电话 -->
-            <div class="form-group">
-                <label for="phone">联系电话</label>
-                <input type="text" id="phone" placeholder="请输入联系电话">
+            
+            <div class="catalog-item">
+                <div class="catalog-icon">🎥</div>
+                <h3>Company Brochure</h3>
+                <p>Company profile and certifications</p>
+                <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
-
-            <!-- 主题 -->
-            <div class="form-group">
-                <label for="subject">反馈主题 *</label>
-                <select id="subject" required>
-                    <option value="">请选择反馈主题</option>
-                    <option value="product">产品咨询</option>
-                    <option value="service">服务反馈</option>
-                    <option value="complaint">投诉建议</option>
-                    <option value="other">其他</option>
-                </select>
-            </div>
-
-            <!-- 内容 -->
-            <div class="form-group">
-                <label for="message">反馈内容 *</label>
-                <textarea id="message" placeholder="请详细描述您的问题或建议" required></textarea>
-            </div>
-
-            <!-- 提交按钮 -->
-            <button type="submit" class="submit-btn">提交反馈</button>
-        </form>
-
-        <!-- 成功提示 -->
-        <div id="success-message" class="success-message">
-            提交成功！感谢您的反馈，我们会尽快与您联系。
         </div>
-    </div>
+    </section>
 
-    <script>
-        // 设置当前时间和地点
-        document.addEventListener('DOMContentLoaded', function() {
-            const timeSpan = document.getElementById('current-time');
-            const locationSpan = document.getElementById('current-location');
-            const successMessage = document.getElementById('success-message');
+    <!-- Contact & Message Board -->
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Get in touch for inquiries and quotations</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">🏢</div>
+                    <div class="contact-details">
+                        <h3>Company Address</h3>
+                        <p>No. 168 Industrial Park Road<br>Shanghai, China 201203</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <h3>Phone Number</h3>
+                        <p>Tel: +86-21-1234-5678<br>Fax: +86-21-1234-5679</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-details">
+                        <h3>Email Address</h3>
+                        <p>Sales: sales@sunrise-ind.com<br>Support: support@sunrise-ind.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-details">
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM (GMT+8)<br>Saturday: 9:00 AM - 12:00 PM</p>
+                    </div>
+                </div>
+            </div>
             
-            // 设置当前时间
-            const now = new Date();
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                weekday: 'long',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                timeZoneName: 'short'
-            };
-            timeSpan.textContent = now.toLocaleDateString('zh-CN', options);
-            
-            // 设置当前地点
-            locationSpan.textContent = '广东省 深圳市';
-            
-            // 表单提交处理
-            document.getElementById('info-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // 这里可以添加实际的提交逻辑
-                console.log('表单提交数据:', {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    subject: document.getElementById('subject').value,
-                    message: document.getElementById('message').value,
-                    time: now.toLocaleString(),
-                    location: '广东省 深圳市'
-                });
-                
-                // 显示成功消息
-                successMessage.style.display = 'block';
-                
-                // 重置表单
-                this.reset();
-                
-                // 3秒后隐藏成功消息
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 3000);
-            });
-        });
-    </script>
-</body>
-</html>
+            <div class="message-board">
+                <h3>Send us a Message</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" required placeholder="John Smith">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" required placeholder="john@company
