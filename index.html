@@ -3,464 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise Industrial Co., Ltd. - Professional Manufacturer & Exporter</title>
+    <title>Wuji Soar - Smart Audio & Lighting Solutions</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
+        /* === 保持原有CSS样式不变 (渐变色/布局/动画) === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
+        
         /* Header */
-        header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: #ffd700;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 16px;
-        }
-
-        nav a:hover {
-            color: #ffd700;
-        }
-
+        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+        .logo span { color: #ffd700; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 16px; }
+        nav a:hover { color: #ffd700; }
+        
         /* Hero Section */
-        .hero {
-            margin-top: 80px;
-            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><path fill="%23ddd" d="M0 300h1200v300H0z"/></svg>');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 120px 20px;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: #ffd700;
-            color: #1e3c72;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        .hero { margin-top: 80px; background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><path fill="%23ddd" d="M0 300h1200v300H0z"/></svg>'); background-size: cover; background-position: center; color: white; text-align: center; padding: 120px 20px; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; animation: fadeInUp 1s ease; }
+        .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
+        .btn { display: inline-block; padding: 15px 40px; background: #ffd700; color: #1e3c72; text-decoration: none; border-radius: 50px; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.4s both; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
         /* Section Styles */
-        section {
-            padding: 80px 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            color: #1e3c72;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: #ffd700;
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 50px;
-        }
-
+        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 36px; color: #1e3c72; margin-bottom: 15px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #ffd700; margin: 15px auto; border-radius: 2px; }
+        .section-subtitle { text-align: center; color: #666; font-size: 18px; margin-bottom: 50px; }
+        
         /* Products */
-        #products {
-            background: white;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .product-info {
-            padding: 25px;
-        }
-
-        .product-info h3 {
-            color: #1e3c72;
-            margin-bottom: 10px;
-            font-size: 22px;
-        }
-
-        .product-info p {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .product-specs {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .product-specs li {
-            padding: 5px 0;
-            color: #555;
-            font-size: 14px;
-        }
-
-        .product-specs li::before {
-            content: '✓ ';
-            color: #ffd700;
-            font-weight: bold;
-        }
-
+        #products { background: white; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .product-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .product-image { width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; }
+        /* 音响使用深蓝/紫色渐变，台灯使用暖黄/橙色渐变以作区分 */
+        .audio-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .light-bg { background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%); } 
+        .product-info { padding: 25px; }
+        .product-info h3 { color: #1e3c72; margin-bottom: 10px; font-size: 22px; }
+        .product-info p { color: #666; margin-bottom: 15px; }
+        .product-specs { list-style: none; margin-bottom: 20px; }
+        .product-specs li { padding: 5px 0; color: #555; font-size: 14px; }
+        .product-specs li::before { content: '✓ '; color: #ffd700; font-weight: bold; }
+        
         /* Catalog Download */
-        #catalog {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            text-align: center;
-            border-radius: 20px;
-            margin: 40px auto;
-            padding: 60px 40px;
-        }
-
-        #catalog .section-title {
-            color: white;
-        }
-
-        #catalog .section-title::after {
-            background: #ffd700;
-        }
-
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .catalog-item {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .catalog-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .catalog-item h3 {
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-
-        .download-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 30px;
-            background: #ffd700;
-            color: #1e3c72;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .download-btn:hover {
-            background: #ffed4e;
-            transform: scale(1.05);
-        }
-
+        #catalog { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; text-align: center; border-radius: 20px; margin: 40px auto; padding: 60px 40px; }
+        #catalog .section-title { color: white; }
+        #catalog .section-title::after { background: #ffd700; }
+        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .catalog-item { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+        .catalog-icon { font-size: 48px; margin-bottom: 15px; }
+        .catalog-item h3 { margin-bottom: 10px; font-size: 20px; }
+        .download-btn { display: inline-block; margin-top: 15px; padding: 12px 30px; background: #ffd700; color: #1e3c72; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s; }
+        .download-btn:hover { background: #ffed4e; transform: scale(1.05); }
+        
         /* Contact */
-        #contact {
-            background: white;
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .contact-info {
-            padding: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .contact-item:hover {
-            transform: translateX(10px);
-        }
-
-        .contact-icon {
-            font-size: 30px;
-            margin-right: 20px;
-            color: #1e3c72;
-        }
-
-        .contact-details h3 {
-            color: #1e3c72;
-            margin-bottom: 5px;
-        }
-
-        .contact-details p {
-            color: #666;
-        }
-
+        #contact { background: white; }
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .contact-info { padding: 20px; }
+        .contact-item { display: flex; align-items: flex-start; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; transition: transform 0.3s; }
+        .contact-item:hover { transform: translateX(10px); }
+        .contact-icon { font-size: 30px; margin-right: 20px; color: #1e3c72; }
+        .contact-details h3 { color: #1e3c72; margin-bottom: 5px; }
+        .contact-details p { color: #666; }
+        
         /* Message Board */
-        .message-board {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-        }
-
-        .message-board h3 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #1e3c72;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: #1e3c72;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .submit-btn:hover {
-            background: #2a5298;
-        }
-
+        .message-board { background: #f8f9fa; padding: 30px; border-radius: 15px; }
+        .message-board h3 { color: #1e3c72; margin-bottom: 20px; font-size: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: 500; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; transition: border-color 0.3s; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #1e3c72; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .submit-btn { width: 100%; padding: 15px; background: #1e3c72; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .submit-btn:hover { background: #2a5298; }
+        
         /* Footer */
-        footer {
-            background: #1a1a2e;
-            color: white;
-            padding: 50px 5% 20px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h3 {
-            color: #ffd700;
-            margin-bottom: 20px;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #aaa;
-            text-decoration: none;
-            line-height: 2;
-        }
-
-        .footer-section a:hover {
-            color: #ffd700;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #666;
-        }
-
+        footer { background: #1a1a2e; color: white; padding: 50px 5% 20px; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px; }
+        .footer-section h3 { color: #ffd700; margin-bottom: 20px; }
+        .footer-section p, .footer-section a { color: #aaa; text-decoration: none; line-height: 2; }
+        .footer-section a:hover { color: #ffd700; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; color: #666; }
+        
         /* Responsive */
-        @media (max-width: 768px) {
-            .header-top {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
+        @media (max-width: 768px) { 
+            .header-top { flex-direction: column; gap: 15px; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 32px; }
+            .contact-container { grid-template-columns: 1fr; }
+            .section-title { font-size: 28px; }
         }
     </style>
 </head>
 <body>
-
     <!-- Header -->
     <header>
         <div class="header-top">
-            <div class="logo">SUNRISE<span>IND</span></div>
+            <!-- 1. 修改Logo名称为 Wuji Soar -->
+            <div class="logo">WUJI <span>SOAR</span></div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -474,52 +117,64 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>Professional Manufacturing & Export Solutions</h1>
-        <p>15+ Years of Excellence in Industrial Equipment | ISO 9001 Certified | Global Shipping</p>
+        <h1>Innovative Audio & Smart Lighting</h1>
+        <p>Premium Bluetooth Speakers & Modern LED Lamps | Designed in Shenzhen | Global Shipping</p>
         <a href="#products" class="btn">Explore Products</a>
     </section>
 
     <!-- Products Section -->
     <section id="products">
         <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">High-quality industrial solutions for global markets</p>
-        
+        <p class="section-subtitle">High-fidelity sound and ambient lighting solutions</p>
         <div class="products-grid">
+            <!-- 产品 1: 蓝牙音响 -->
             <div class="product-card">
-                <div class="product-image">Product Image 1</div>
+                <div class="product-image audio-bg">
+                    <!-- 这里可以替换成实际的图片标签 <img src="speaker.jpg" alt="..."> -->
+                    Speaker Image
+                </div>
                 <div class="product-info">
-                    <h3>Industrial Pump Series A</h3>
-                    <p>High-efficiency centrifugal pumps designed for heavy-duty applications in chemical and petroleum industries.</p>
+                    <h3>Wireless Bluetooth Speaker X1</h3>
+                    <p>Premium portable speaker with 360° surround sound and 20-hour playtime. Perfect for outdoor and indoor use.</p>
                     <ul class="product-specs">
-                        <li>Flow Rate: 100-5000 m³/h</li>
-                        <li>Material: Stainless Steel 316</li>
-                        <li>Certification: CE, ISO 9001</li>
+                        <li>Battery Life: 20 Hours</li>
+                        <li>Bluetooth Version: 5.3</li>
+                        <li>Waterproof: IPX7</li>
+                        <li>Material: Aluminum Alloy</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- 产品 2: 智能台灯 -->
             <div class="product-card">
-                <div class="product-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">Product Image 2</div>
+                <div class="product-image light-bg">
+                    Lamp Image
+                </div>
                 <div class="product-info">
-                    <h3>Precision Valve System</h3>
-                    <p>Advanced control valves with smart automation capabilities for precise flow management.</p>
+                    <h3>Smart LED Desk Lamp S2</h3>
+                    <p>Eye-care adjustable lamp with smart touch control and wireless charging pad. Reduces eye strain during long work hours.</p>
                     <ul class="product-specs">
-                        <li>Pressure Rating: PN16-PN40</li>
-                        <li>Temperature Range: -40°C to 450°C</li>
-                        <li>Actuator Type: Electric/Pneumatic</li>
+                        <li>Light Modes: Warm/Cool/RGB</li>
+                        <li>Adjustable: 360° Flexible Neck</li>
+                        <li>Features: Wireless Charging, USB Port</li>
+                        <li>Material: ABS + Silicone</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- 产品 3: 旗舰音响 (可选) -->
             <div class="product-card">
-                <div class="product-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">Product Image 3</div>
+                <div class="product-image audio-bg">
+                    Speaker Image 3
+                </div>
                 <div class="product-info">
-                    <h3>Heat Exchanger Unit</h3>
-                    <p>Compact and efficient heat exchange solutions for HVAC and industrial processing systems.</p>
+                    <h3>Home Theater Soundbar Z3</h3>
+                    <p>Immersive cinematic audio experience for your living room. Equipped with subwoofer for deep bass.</p>
                     <ul class="product-specs">
-                        <li>Capacity: 50-2000 kW</li>
-                        <li>Plate Material: Titanium/SS304</li>
-                        <li>Efficiency: Up to 95%</li>
+                        <li>Power Output: 120W</li>
+                        <li>Connectivity: HDMI, Optical, AUX</li>
+                        <li>Dimensions: 1000 x 80 x 60 mm</li>
+                        <li>Warranty: 2 Years</li>
                     </ul>
                 </div>
             </div>
@@ -530,26 +185,23 @@
     <section id="catalog">
         <h2 class="section-title">Download Catalog</h2>
         <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Get detailed product specifications and technical documentation</p>
-        
         <div class="catalog-grid">
             <div class="catalog-item">
                 <div class="catalog-icon">📄</div>
-                <h3>Product Catalog 2024</h3>
-                <p>Complete product range with specifications</p>
+                <h3>Audio Products 2024</h3>
+                <p>Speakers and Soundbars Specifications</p>
                 <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
-            
             <div class="catalog-item">
-                <div class="catalog-icon">📊</div>
-                <h3>Technical Manual</h3>
-                <p>Detailed installation and operation guides</p>
+                <div class="catalog-icon">💡</div>
+                <h3>Lighting Solutions</h3>
+                <p>Lamps and Smart Lighting Guides</p>
                 <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
-            
             <div class="catalog-item">
-                <div class="catalog-icon">🎥</div>
+                <div class="catalog-icon">📱</div>
                 <h3>Company Brochure</h3>
-                <p>Company profile and certifications</p>
+                <p>Wuji Soar Profile & Certifications</p>
                 <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
             </div>
         </div>
@@ -559,50 +211,100 @@
     <section id="contact">
         <h2 class="section-title">Contact Us</h2>
         <p class="section-subtitle">Get in touch for inquiries and quotations</p>
-        
         <div class="contact-container">
             <div class="contact-info">
                 <div class="contact-item">
                     <div class="contact-icon">🏢</div>
                     <div class="contact-details">
-                        <h3>Company Address</h3>
-                        <p>No. 168 Industrial Park Road<br>Shanghai, China 201203</p>
+                        <h3>Headquarters</h3>
+                        <!-- 2. 更新地址为深圳 -->
+                        <p>Shenzhen High-Tech Industrial Park<br>Shenzhen, Guangdong 518000</p>
                     </div>
                 </div>
-                
                 <div class="contact-item">
                     <div class="contact-icon">📞</div>
                     <div class="contact-details">
-                        <h3>Phone Number</h3>
-                        <p>Tel: +86-21-1234-5678<br>Fax: +86-21-1234-5679</p>
+                        <h3>Phone/WhatsApp</h3>
+                        <p>Tel: +86-755-XXXX-XXXX<br>Mobile: +86 138 XXXX XXXX</p>
                     </div>
                 </div>
-                
                 <div class="contact-item">
                     <div class="contact-icon">✉️</div>
                     <div class="contact-details">
                         <h3>Email Address</h3>
-                        <p>Sales: sales@sunrise-ind.com<br>Support: support@sunrise-ind.com</p>
+                        <p>Sales: sales@wujisoar.com<br>Support: support@wujiso
                     </div>
                 </div>
-                
                 <div class="contact-item">
                     <div class="contact-icon">🕐</div>
                     <div class="contact-details">
                         <h3>Business Hours</h3>
-                        <p>Monday - Friday: 9:00 AM - 6:00 PM (GMT+8)<br>Saturday: 9:00 AM - 12:00 PM</p>
+                        <p>Monday - Saturday: 9:00 AM - 6:00 PM (GMT+8)</p>
                     </div>
                 </div>
             </div>
-            
             <div class="message-board">
                 <h3>Send us a Message</h3>
-                <form onsubmit="handleSubmit(event)">
+                <!-- 3. 修复了原代码中截断的 form 标签 -->
+                <form onsubmit="alert('Message sent!'); return false;">
                     <div class="form-group">
                         <label for="name">Your Name *</label>
                         <input type="text" id="name" required placeholder="John Smith">
                     </div>
-                    
                     <div class="form-group">
                         <label for="email">Email Address *</label>
-                        <input type="email" id="email" required placeholder="john@company
+                        <input type="email" id="email" required placeholder="john@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="product">Interested Product</label>
+                        <select id="product">
+                            <option value="">Select a product</option>
+                            <option value="speaker">Bluetooth Speaker</option>
+                            <option value="lamp">Smart Lamp</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" required placeholder="Hi, I would like to know more about..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Wuji Soar</h3>
+                <p>Innovating the future of audio and lighting technology. We combine sleek design with powerful performance.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#products">Products</a></p>
+                <p><a href="#catalog">Catalog</a></p>
+                <p><a href="#contact">Contact</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Shenzhen, Guangdong, China</p>
+                <p>Email: sales@wujisoar.com</p>
+                <p>Phone: +86-755-XXXX-XXXX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Wuji Soar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thanks for your message! We will reply within 24 hours.');
+        }
+    </script>
+</body>
+</html>
