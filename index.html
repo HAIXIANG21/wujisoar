@@ -1,342 +1,1085 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wuji Soar - Smart Audio & Lighting</title>
-    <style>
-        /* === 保持原有基础样式不变 === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
-        
-        /* ... (中间的 header, hero CSS 保持不变) ... */
-        
-        /* Header */
-        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1400px; margin: 0 auto; }
-        .logo { font-size: 28px; font-weight: bold; letter-spacing: 1px; }
-        .logo span { color: #ffd700; }
-        nav ul { display: flex; list-style: none; gap: 30px; }
-        nav a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 16px; }
-        nav a:hover { color: #ffd700; }
-        
-        /* Hero Section */
-        .hero { margin-top: 80px; background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><path fill="%23ddd" d="M0 300h1200v300H0z"/></svg>'); background-size: cover; background-position: center; color: white; text-align: center; padding: 120px 20px; }
-        .hero h1 { font-size: 48px; margin-bottom: 20px; animation: fadeInUp 1s ease; }
-        .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
-        .btn { display: inline-block; padding: 15px 40px; background: #ffd700; color: #1e3c72; text-decoration: none; border-radius: 50px; font-weight: bold; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease 0.4s both; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Section Styles */
-        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 36px; color: #1e3c72; margin-bottom: 15px; position: relative; }
-        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #ffd700; margin: 15px auto; border-radius: 2px; }
-        .section-subtitle { text-align: center; color: #666; font-size: 18px; margin-bottom: 50px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* === 修改后的 Products CSS (支持滚动) === */
-        #products { background: white; }
-        
-        /* 1. 容器样式：强制横向滚动 */
-        .products-grid {
-            display: flex; /* 改为 Flex 布局 */
-            overflow-x: auto; /* 启用横向滚动条 */
-            gap: 30px; /* 项目间距 */
-            padding-bottom: 20px; /* 底部留白，防止滚动条遮挡阴影 */
-            scrollbar-width: thin; /* Firefox: 滚动条变细 */
-            -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
-        }
-        
-        /* 2. 隐藏滚动条 (视觉更干净) */
-        .products-grid::-webkit-scrollbar {
-            display: none; /* Chrome/Safari: 隐藏滚动条 */
-        }
-        
-        /* 3. 产品卡片：固定宽度，不压缩 */
-        .product-card {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            flex: 0 0 300px; /* 关键：不增长、不收缩、基础宽度300px */
-            cursor: grab; /* 手型光标提示可拖拽 */
-        }
-        
-        .product-card:active {
-            cursor: grabbing;
-            transform: scale(0.98); /* 按下时轻微缩小 */
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        
-        .product-image { width: 100%; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; }
-        .audio-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .light-bg { background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%); } 
-        .product-info { padding: 25px; }
-        .product-info h3 { color: #1e3c72; margin-bottom: 10px; font-size: 22px; }
-        .product-info p { color: #666; margin-bottom: 15px; }
-        .product-specs { list-style: none; margin-bottom: 20px; }
-        .product-specs li { padding: 5px 0; color: #555; font-size: 14px; }
-        .product-specs li::before { content: '✓ '; color: #ffd700; font-weight: bold; }
-        
-        /* ... (其余 Catalog, Contact, Footer CSS 保持不变) ... */
-        
-        /* Catalog Download */
-        #catalog { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; text-align: center; border-radius: 20px; margin: 40px auto; padding: 60px 40px; }
-        #catalog .section-title { color: white; }
-        #catalog .section-title::after { background: #ffd700; }
-        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .catalog-item { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
-        .catalog-icon { font-size: 48px; margin-bottom: 15px; }
-        .catalog-item h3 { margin-bottom: 10px; font-size: 20px; }
-        .download-btn { display: inline-block; margin-top: 15px; padding: 12px 30px; background: #ffd700; color: #1e3c72; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s; }
-        .download-btn:hover { background: #ffed4e; transform: scale(1.05); }
-        
-        /* Contact */
-        #contact { background: white; }
-        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-        .contact-info { padding: 20px; }
-        .contact-item { display: flex; align-items: flex-start; margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; transition: transform 0.3s; }
-        .contact-item:hover { transform: translateX(10px); }
-        .contact-icon { font-size: 30px; margin-right: 20px; color: #1e3c72; }
-        .contact-details h3 { color: #1e3c72; margin-bottom: 5px; }
-        .contact-details p { color: #666; }
-        
-        /* Message Board */
-        .message-board { background: #f8f9fa; padding: 30px; border-radius: 15px; }
-        .message-board h3 { color: #1e3c72; margin-bottom: 20px; font-size: 24px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: 500; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; transition: border-color 0.3s; font-family: inherit; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #1e3c72; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .submit-btn { width: 100%; padding: 15px; background: #1e3c72; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-        .submit-btn:hover { background: #2a5298; }
-        
-        /* Footer */
-        footer { background: #1a1a2e; color: white; padding: 50px 5% 20px; }
-        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px; }
-        .footer-section h3 { color: #ffd700; margin-bottom: 20px; }
-        .footer-section p, .footer-section a { color: #aaa; text-decoration: none; line-height: 2; }
-        .footer-section a:hover { color: #ffd700; }
-        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; color: #666; }
-        
-        /* Responsive */
-        @media (max-width: 768px) { 
-            .header-top { flex-direction: column; gap: 15px; }
-            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 32px; }
-            .contact-container { grid-template-columns: 1fr; }
-            .section-title { font-size: 28px; }
-        }
-    </style>
+<title>WUJI SOAR - Smart Audio & Lighting</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    line-height:1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+
+    background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);
+
+    box-shadow:0 2px 10px rgba(0,0,0,0.15);
+}
+
+.header-top{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:18px 5%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    color:white;
+}
+
+.logo span{
+    color:#ffd700;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#ffd700;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    margin-top:80px;
+
+    background:
+    linear-gradient(rgba(30,60,114,0.85),rgba(42,82,152,0.85)),
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400');
+
+    background-size:cover;
+    background-position:center;
+
+    color:white;
+
+    text-align:center;
+
+    padding:140px 20px;
+}
+
+.hero h1{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    opacity:0.9;
+    margin-bottom:35px;
+}
+
+.btn{
+    display:inline-block;
+
+    padding:15px 40px;
+
+    background:#ffd700;
+
+    color:#1e3c72;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section{
+    max-width:1400px;
+    margin:auto;
+    padding:90px 5%;
+}
+
+.section-title{
+
+    text-align:center;
+
+    font-size:38px;
+
+    color:#1e3c72;
+
+    margin-bottom:15px;
+}
+
+.section-title::after{
+
+    content:'';
+
+    width:80px;
+
+    height:4px;
+
+    background:#ffd700;
+
+    display:block;
+
+    margin:15px auto;
+
+    border-radius:5px;
+}
+
+.section-subtitle{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:50px;
+
+    font-size:18px;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+#products{
+    background:white;
+}
+
+.products-wrapper{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+/* 滚动区域 */
+
+.products-grid{
+
+    display:flex;
+
+    gap:30px;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    scroll-behavior:smooth;
+
+    width:100%;
+
+    padding:20px 10px;
+
+    scrollbar-width:none;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+.products-grid::-webkit-scrollbar{
+    display:none;
+}
+
+/* 卡片 */
+
+.product-card{
+
+    flex:0 0 320px;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+    transition:0.3s;
+}
+
+.product-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.product-image{
+
+    height:250px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:bold;
+}
+
+.audio-bg{
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+}
+
+.light-bg{
+    background:linear-gradient(135deg,#ff8a00 0%,#e52e71 100%);
+}
+
+.product-info{
+    padding:25px;
+}
+
+.product-info h3{
+    color:#1e3c72;
+    margin-bottom:12px;
+}
+
+.product-info p{
+    color:#666;
+    margin-bottom:15px;
+}
+
+.product-specs{
+    list-style:none;
+}
+
+.product-specs li{
+    padding:6px 0;
+    color:#555;
+    font-size:14px;
+}
+
+.product-specs li::before{
+    content:'✓ ';
+    color:#ffd700;
+    font-weight:bold;
+}
+
+/* 左右按钮 */
+
+.scroll-btn{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:55px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+
+    cursor:pointer;
+
+    z-index:10;
+
+    font-size:26px;
+
+    transition:0.3s;
+}
+
+.scroll-btn:hover{
+    background:#1e3c72;
+    color:white;
+}
+
+.left-btn{
+    left:-25px;
+}
+
+.right-btn{
+    right:-25px;
+}
+
+/* =========================
+   CATALOG
+========================= */
+
+#catalog{
+
+    background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);
+
+    color:white;
+
+    border-radius:25px;
+
+    margin:40px auto;
+
+    text-align:center;
+}
+
+#catalog .section-title{
+    color:white;
+}
+
+.catalog-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+    margin-top:40px;
+}
+
+.catalog-item{
+
+    background:rgba(255,255,255,0.1);
+
+    padding:35px;
+
+    border-radius:20px;
+
+    backdrop-filter:blur(10px);
+}
+
+.catalog-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.download-btn{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:12px 30px;
+
+    background:#ffd700;
+
+    color:#1e3c72;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+#contact{
+    background:white;
+}
+
+.contact-container{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:50px;
+}
+
+.contact-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    margin-bottom:25px;
+
+    padding:22px;
+
+    background:#f7f7f7;
+
+    border-radius:15px;
+}
+
+.contact-icon{
+    font-size:32px;
+    margin-right:20px;
+}
+
+.message-board{
+
+    background:#f7f7f7;
+
+    padding:35px;
+
+    border-radius:20px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:2px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:16px;
+}
+
+.submit-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1e3c72;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    background:#1a1a2e;
+
+    color:white;
+
+    padding:60px 5% 20px;
+}
+
+.footer-content{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:40px;
+}
+
+.footer-section h3{
+
+    color:#ffd700;
+
+    margin-bottom:20px;
+}
+
+.footer-section p,
+.footer-section a{
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    line-height:2;
+}
+
+.footer-bottom{
+
+    text-align:center;
+
+    margin-top:40px;
+
+    padding-top:20px;
+
+    border-top:1px solid #333;
+
+    color:#777;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .header-top{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .contact-container{
+        grid-template-columns:1fr;
+    }
+
+    .product-card{
+        flex:0 0 85%;
+    }
+
+    .scroll-btn{
+        display:none;
+    }
+}
+
+</style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-top">
-            <div class="logo">WUJI <span>SOAR</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#catalog">Catalog</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+
+<!-- HEADER -->
+<header>
+
+    <div class="header-top">
+
+        <div class="logo">
+            WUJI <span>SOAR</span>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>Immersive Sound & Smart Lighting</h1>
-        <p>Premium Bluetooth Speakers & Modern LED Lamps | Designed in Shenzhen</p>
-        <a href="#products" class="btn">Explore Products</a>
-    </section>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#catalog">Catalog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
 
-    <!-- Products Section (4 items with Scroll) -->
-    <section id="products">
-        <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">High-fidelity sound and ambient lighting solutions</p>
-        
-        <!-- 滚动容器 -->
+    </div>
+
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <h1>Immersive Sound & Smart Lighting</h1>
+
+    <p>
+        Premium Bluetooth Speakers & Modern LED Lamps
+    </p>
+
+    <a href="#products" class="btn">
+        Explore Products
+    </a>
+
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+
+    <h2 class="section-title">
+        Our Products
+    </h2>
+
+    <p class="section-subtitle">
+        High-fidelity sound and ambient lighting solutions
+    </p>
+
+    <div class="products-wrapper">
+
+        <!-- 左按钮 -->
+        <button class="scroll-btn left-btn">
+            &#10094;
+        </button>
+
+        <!-- 产品滚动区域 -->
         <div class="products-grid">
-            <!-- Item 1 -->
+
+            <!-- CARD 1 -->
             <div class="product-card">
-                <div class="product-image audio-bg">Bluetooth Speaker X1</div>
-                <div class="product-info">
-                    <h3>Premium Portable Speaker</h3>
-                    <p>Crystal clear 360° sound with deep bass. IPX7 waterproof for pool parties.</p>
-                    <ul class="product-specs">
-                        <li>Battery: 20H Playtime</li>
-                        <li>BT Version: 5.3</li>
-                        <li>Feature: RGB Lights</li>
-                    </ul>
+
+                <div class="product-image audio-bg">
+                    Speaker X1
                 </div>
+
+                <div class="product-info">
+
+                    <h3>Portable Speaker</h3>
+
+                    <p>
+                        Crystal clear 360° sound with deep bass.
+                    </p>
+
+                    <ul class="product-specs">
+                        <li>20H Playtime</li>
+                        <li>Bluetooth 5.3</li>
+                        <li>RGB Lighting</li>
+                    </ul>
+
+                </div>
+
             </div>
 
-            <!-- Item 2 -->
+            <!-- CARD 2 -->
             <div class="product-card">
-                <div class="product-image light-bg">Smart Lamp S2</div>
-                <div class="product-info">
-                    <h3>Eye-Care Desk Lamp</h3>
-                    <p>Adjustable gooseneck with wireless charging. Protects eyes during night work.</p>
-                    <ul class="product-specs">
-                        <li>Light: Warm/Cool/RGB</li>
-                        <li>Feature: Qi Charging</li>
-                        <li>Material: Metal+Silicone</li>
-                    </ul>
+
+                <div class="product-image light-bg">
+                    Lamp S2
                 </div>
+
+                <div class="product-info">
+
+                    <h3>Desk Lamp</h3>
+
+                    <p>
+                        Eye-care lamp with wireless charging.
+                    </p>
+
+                    <ul class="product-specs">
+                        <li>Warm / Cool Light</li>
+                        <li>Qi Charging</li>
+                        <li>Modern Design</li>
+                    </ul>
+
+                </div>
+
             </div>
 
-            <!-- Item 3 (新增第3个栏目) -->
+            <!-- CARD 3 -->
             <div class="product-card">
-                <div class="product-image audio-bg">Soundbar Z3</div>
-                <div class="product-info">
-                    <h3>Home Theater Soundbar</h3>
-                    <p>Surround sound experience with subwoofer. Perfect for movies and gaming.</p>
-                    <ul class="product-specs">
-                        <li>Power: 120W</li>
-                        <li>Connect: HDMI/Optical</li>
-                        <li>Warranty: 2 Years</li>
-                    </ul>
+
+                <div class="product-image audio-bg">
+                    Soundbar Z3
                 </div>
+
+                <div class="product-info">
+
+                    <h3>Home Theater</h3>
+
+                    <p>
+                        Powerful surround sound experience.
+                    </p>
+
+                    <ul class="product-specs">
+                        <li>120W Output</li>
+                        <li>HDMI + Optical</li>
+                        <li>2 Years Warranty</li>
+                    </ul>
+
+                </div>
+
             </div>
 
-            <!-- Item 4 (新增第4个栏目) -->
+            <!-- CARD 4 -->
             <div class="product-card">
-                <div class="product-image light-bg">Bedroom Light M4</div>
+
+                <div class="product-image light-bg">
+                    RGBIC Light
+                </div>
+
                 <div class="product-info">
-                    <h3>Atmosphere Smart Light</h3>
-                    <p>App-controlled RGBIC lighting strip. Syncs with music for immersive gaming.</p>
+
+                    <h3>Gaming Atmosphere Light</h3>
+
+                    <p>
+                        Smart RGB lighting synced with music.
+                    </p>
+
                     <ul class="product-specs">
-                        <li>Control: App/Voice</li>
-                        <li>Effect: 16 Million Colors</li>
-                        <li>Usage: Bedroom/Gaming</li>
+                        <li>APP Control</li>
+                        <li>16M Colors</li>
+                        <li>Voice Assistant</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Catalog Download -->
-    <section id="catalog">
-        <h2 class="section-title">Download Catalog</h2>
-        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Get detailed product specifications</p>
-        <div class="catalog-grid">
-            <div class="catalog-item">
-                <div class="catalog-icon">🎵</div>
-                <h3>Audio Catalog 2024</h3>
-                <p>Speakers and Soundbars</p>
-                <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
-            </div>
-            <div class="catalog-item">
-                <div class="catalog-icon">💡</div>
-                <h3>Lighting Catalog</h3>
-                <p>Lamps and Lighting Strips</p>
-                <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
-            </div>
-            <div class="catalog-item">
-                <div class="catalog-icon">📱</div>
-                <h3>Company Profile</h3>
-                <p>OEM/ODM Services & Certifications</p>
-                <a href="#" class="download-btn" onclick="alert('Download started!')">Download PDF</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">Get in touch for inquiries</p>
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">🏢</div>
-                    <div class="contact-details">
-                        <h3>Factory Address</h3>
-                        <p>Shenzhen, Guangdong 518000</p>
-                    </div>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-details">
-                        <h3>Phone/WhatsApp</h3>
-                        <p>+86 138 XXXX XXXX</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p>Sales: sales@wujisoar.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="message-board">
-                <h3>Send Message</h3>
-                <form onsubmit="alert('Sent!'); return false;">
-                    <div class="form-group">
-                        <label for="name">Name *</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Inquiry</button>
-                </form>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>WUJI SOAR</h3>
-                <p>Your trusted partner for audio and lighting solutions in Shenzhen.</p>
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <p><a href="#home">Home</a></p>
-                <p><a href="#products">Products</a></p>
-                <p><a href="#catalog">Catalog</a></p>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Email: sales@wujisoar.com</p>
-                <p>Phone: +86 138 XXXX XXXX</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Wuji Soar. All Rights Reserved.</p>
-        </div>
-    </footer>
 
-    <script>
-        // 简单的拖拽滚动逻辑 (增强鼠标操作体验)
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        
-        const slider = document.querySelector('.products-grid');
-        
-        if(slider) {
-            slider.addEventListener('mousedown', (e) => {
-                isDown = true;
-                slider.classList.add('active');
-                startX = e.pageX - slider.offsetLeft;
-                scrollLeft = slider.scrollLeft;
-            });
-            
-            slider.addEventListener('mouseleave', () => {
-                is
+            <!-- CARD 5 -->
+            <div class="product-card">
+
+                <div class="product-image audio-bg">
+                    Mini P5
+                </div>
+
+                <div class="product-info">
+
+                    <h3>Mini Travel Speaker</h3>
+
+                    <p>
+                        Compact portable speaker for outdoor use.
+                    </p>
+
+                    <ul class="product-specs">
+                        <li>Portable</li>
+                        <li>10H Battery</li>
+                        <li>Bluetooth 5.2</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 右按钮 -->
+        <button class="scroll-btn right-btn">
+            &#10095;
+        </button>
+
+    </div>
+
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+
+    <h2 class="section-title">
+        Download Catalog
+    </h2>
+
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.8)">
+        Get detailed product specifications
+    </p>
+
+    <div class="catalog-grid">
+
+        <div class="catalog-item">
+
+            <div class="catalog-icon">🎵</div>
+
+            <h3>Audio Catalog</h3>
+
+            <p>Speakers & Soundbars</p>
+
+            <a href="#" class="download-btn">
+                Download PDF
+            </a>
+
+        </div>
+
+        <div class="catalog-item">
+
+            <div class="catalog-icon">💡</div>
+
+            <h3>Lighting Catalog</h3>
+
+            <p>Lamps & RGB Lights</p>
+
+            <a href="#" class="download-btn">
+                Download PDF
+            </a>
+
+        </div>
+
+        <div class="catalog-item">
+
+            <div class="catalog-icon">📱</div>
+
+            <h3>Company Profile</h3>
+
+            <p>OEM / ODM Services</p>
+
+            <a href="#" class="download-btn">
+                Download PDF
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+    <h2 class="section-title">
+        Contact Us
+    </h2>
+
+    <p class="section-subtitle">
+        Get in touch for inquiries
+    </p>
+
+    <div class="contact-container">
+
+        <div>
+
+            <div class="contact-item">
+
+                <div class="contact-icon">🏢</div>
+
+                <div>
+                    <h3>Factory Address</h3>
+                    <p>Shenzhen, Guangdong</p>
+                </div>
+
+            </div>
+
+            <div class="contact-item">
+
+                <div class="contact-icon">📞</div>
+
+                <div>
+                    <h3>Phone</h3>
+                    <p>+86 138 XXXX XXXX</p>
+                </div>
+
+            </div>
+
+            <div class="contact-item">
+
+                <div class="contact-icon">✉️</div>
+
+                <div>
+                    <h3>Email</h3>
+                    <p>sales@wujisoar.com</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="message-board">
+
+            <h3 style="margin-bottom:20px;">
+                Send Message
+            </h3>
+
+            <form>
+
+                <div class="form-group">
+
+                    <label>Name</label>
+
+                    <input type="text">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input type="email">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Message</label>
+
+                    <textarea rows="5"></textarea>
+
+                </div>
+
+                <button class="submit-btn">
+                    Send Inquiry
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-content">
+
+        <div class="footer-section">
+
+            <h3>WUJI SOAR</h3>
+
+            <p>
+                Premium audio and lighting solutions from Shenzhen.
+            </p>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3>Quick Links</h3>
+
+            <p><a href="#home">Home</a></p>
+            <p><a href="#products">Products</a></p>
+            <p><a href="#catalog">Catalog</a></p>
+
+        </div>
+
+        <div class="footer-section">
+
+            <h3>Contact</h3>
+
+            <p>sales@wujisoar.com</p>
+
+            <p>+86 138 XXXX XXXX</p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 WUJI SOAR. All Rights Reserved.
+    </div>
+
+</footer>
+
+<!-- =========================
+   JS
+========================= -->
+
+<script>
+
+const productGrid = document.querySelector('.products-grid');
+
+const leftBtn = document.querySelector('.left-btn');
+
+const rightBtn = document.querySelector('.right-btn');
+
+const scrollAmount = 350;
+
+/* =========================
+   BUTTON SCROLL
+========================= */
+
+rightBtn.addEventListener('click', () => {
+
+    productGrid.scrollBy({
+
+        left: scrollAmount,
+
+        behavior: 'smooth'
+
+    });
+
+});
+
+leftBtn.addEventListener('click', () => {
+
+    productGrid.scrollBy({
+
+        left: -scrollAmount,
+
+        behavior: 'smooth'
+
+    });
+
+});
+
+/* =========================
+   AUTO SLIDE
+========================= */
+
+let autoSlide = setInterval(startSlide, 3000);
+
+function startSlide(){
+
+    if(
+        productGrid.scrollLeft + productGrid.clientWidth
+        >=
+        productGrid.scrollWidth - 10
+    ){
+
+        productGrid.scrollTo({
+
+            left:0,
+
+            behavior:'smooth'
+
+        });
+
+    }else{
+
+        productGrid.scrollBy({
+
+            left:scrollAmount,
+
+            behavior:'smooth'
+
+        });
+    }
+}
+
+/* =========================
+   PAUSE ON HOVER
+========================= */
+
+productGrid.addEventListener('mouseenter', () => {
+
+    clearInterval(autoSlide);
+
+});
+
+productGrid.addEventListener('mouseleave', () => {
+
+    autoSlide = setInterval(startSlide, 3000);
+
+});
+
+</script>
+
+</body>
+</html>
