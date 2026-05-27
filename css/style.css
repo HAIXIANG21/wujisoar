@@ -47,12 +47,19 @@
 }
 
 .product-image{
-    height:250px;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f0f0f0;
+    position:relative;
+}
+
+.img-label{
+    position:absolute;
+    bottom:10px;
+    left:10px;
+
+    background:rgba(0,0,0,0.5);
+    color:white;
+    padding:5px 10px;
+    border-radius:8px;
+    font-size:14px;
 }
 
 .product-image img{
