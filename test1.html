@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Wuji Soar - Digital, Home Appliance & Auto Supplies</title>
+
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f7fc;
+            color: #1e2a3a;
+            line-height: 1.5;
+        }
+
+        /* ===== 头部 ===== */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(135deg, #0b2b44 0%, #1a4a6f 100%);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-top {
+            max-width: 1400px;
+            margin: auto;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+        }
+        .logo span {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        nav a:hover {
+            color: #ffc107;
+            transform: translateY(-2px);
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: linear-gradient(97deg, #0f2c3f 0%, #1b4f72 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px 70px;
+        }
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 20px;
+            opacity: 0.92;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        .btn-explore {
+            display: inline-block;
+            background: #ffc107;
+            color: #1e3c72;
+            padding: 12px 38px;
+            border-radius: 40px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .btn-explore:hover {
+            background: #ffda44;
+            transform: translateY(-3px);
+        }
+
+        /* ===== 通用 Section ===== */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 70px 5%;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #0b2b44;
+            margin-bottom: 12px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #5d6f7f;
+            margin-bottom: 45px;
+            font-size: 18px;
+        }
+
+        /* ===== 分类区块 ===== */
+        .category-block {
+            margin-bottom: 70px;
+        }
+        .category-title {
+            font-size: 28px;
+            font-weight: 700;
+            border-left: 7px solid #ffc107;
+            padding-left: 20px;
+            margin-bottom: 28px;
+            color: #1e4663;
+        }
+
+        /* ===== 商品网格 ===== */
+        .goods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 24px;
+        }
+        .goods-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            border: 1px solid #eef2f8;
+            cursor: pointer;
+        }
+        .goods-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+            border-color: #ffc107;
+        }
+
+        .product-img-container {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 12px;
+            transition: transform 0.3s ease;
+            background: #ffffff;
+        }
+        .goods-card:hover .product-img-container img {
+            transform: scale(1.05);
+        }
+
+        .goods-info {
+            padding: 16px;
+            text-align: center;
+        }
+        .goods-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1f3b4c;
+            margin-bottom: 6px;
+        }
+
+        /* ===== 音频滚动区 ===== */
+        .featured-scroll {
+            background: #ffffffea;
+            border-radius: 48px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+            padding: 30px 20px 20px;
+            margin-bottom: 60px;
+        }
+        .scroll-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .scroll-header h3 {
+            font-size: 28px;
+            color: #0b2b44;
+        }
+
+        .products-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .products-grid {
+            display: flex;
+            gap: 28px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            width: 100%;
+            padding: 15px 8px 25px;
+            scrollbar-width: thin;
+        }
+        .products-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .product-card {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+            border: 1px solid #e9edf2;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        }
+        .product-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #faf9fe;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 16px;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover .product-img img {
+            transform: scale(1.06);
+        }
+        .product-info {
+            padding: 18px;
+        }
+        .product-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #1f3b4c;
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 45%;
+            background: white;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 60px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 26px;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.2s;
+            color: #1e4663;
+        }
+        .left-btn {
+            left: -18px;
+        }
+        .right-btn {
+            right: -18px;
+        }
+        .scroll-btn:hover {
+            background: #ffc107;
+            color: #0b2b44;
+        }
+
+        /* ===== 弹窗 ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+        .modal-content {
+            background: white;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 48px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.3s ease;
+            overflow: hidden;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #0b2b44, #1a4a6f);
+            color: white;
+            padding: 20px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .close-modal {
+            font-size: 32px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-modal:hover {
+            color: #ffc107;
+        }
+        .modal-body {
+            padding: 30px 28px;
+        }
+        .detail-img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .detail-img img {
+            max-width: 180px;
+            max-height: 180px;
+            object-fit: contain;
+            border-radius: 20px;
+            background: #f3f4f6;
+            padding: 8px;
+        }
+        .spec-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .spec-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eef2f8;
+        }
+        .inquiry-link {
+            background: #ffc107;
+            text-align: center;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-top: 24px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+        }
+        .inquiry-link:hover {
+            background: #ffda44;
+        }
+
+        /* ===== 联系表单 ===== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            background: white;
+            border-radius: 48px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+        .contact-icon {
+            font-size: 32px;
+        }
+        .message-board {
+            background: #f8fafd;
+            padding: 30px;
+            border-radius: 32px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #1e3c72;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 28px;
+            border: 1px solid #cfdfed;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+        }
+        .submit-btn {
+            width: 100%;
+            background: #ffc107;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #1e3c72;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .submit-btn:hover {
+            background: #ffda44;
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #10b981;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            z-index: 2100;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 350px;
+        }
+        .toast.error {
+            background: #ef4444;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: #0f2c3f;
+            color: #ddd;
+            padding: 40px 5% 20px;
+            margin-top: 30px;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .footer-section h3 {
+            color: #ffc107;
+            margin-bottom: 18px;
+        }
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        .footer-section a:hover {
+            color: #ffc107;
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #2a4c6e;
+            padding-top: 25px;
+            margin-top: 35px;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 780px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .contact-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .goods-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .scroll-btn {
+                display: none;
+            }
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="header-top">
+            <div class="logo">Wuji Soar <span>Global Trading</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#all-categories">Products</a></li>
+                    <li><a href="#featured">Audio Gear</a></li>
+                    <li><a href="#contact">Inquiry</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <h1>Digital · Home Appliance · Auto Supplies</h1>
+        <p>Premium products with stunning design | OEM/ODM ready for global brands</p>
+        <a href="#all-categories" class="btn-explore">Browse All Products →</a>
+    </section>
+
+    <!-- ===== 全部产品分类 ===== -->
+    <section id="all-categories">
+        <h2 class="section-title">Complete Product Catalog</h2>
+        <p class="section-subtitle">Click any product to view details &amp; request a quote</p>
+
+        <!-- Digital & Computer -->
+        <div class="category-block">
+            <div class="category-title">📱 Digital &amp; Computer</div>
+            <div class="goods-grid" id="digital-goods"></div>
+        </div>
+
+        <!-- Home Appliances -->
+        <div class="category-block">
+            <div class="category-title">🏠 Home Appliances</div>
+            <div class="goods-grid" id="appliance-goods"></div>
+        </div>
+
+        <!-- Automotive Supplies -->
+        <div class="category-block">
+            <div class="category-title">🚗 Automotive Supplies</div>
+            <div class="goods-grid" id="auto-goods"></div>
+        </div>
+    </section>
+
+    <!-- ===== 音频精选 ===== -->
+    <section id="featured">
+        <div class="featured-scroll">
+            <div class="scroll-header">
+                <h3>🎵 Premium Bluetooth Audio Series</h3>
+                <p>High-fidelity sound with stunning visual effects | Customizable branding</p>
+            </div>
+            <div class="products-wrapper">
+                <button class="scroll-btn left-btn" id="leftScrollBtn">❮</button>
+                <div class="products-grid" id="dynamicProductGrid"></div>
+                <button class="scroll-btn right-btn" id="rightScrollBtn">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 联系 / 询盘 ===== -->
+    <section id="contact">
+        <h2 class="section-title">Get Catalog &amp; Price List</h2>
+        <p class="section-subtitle">Request our latest digital/home/auto catalog &amp; OEM solutions</p>
+        <div class="contact-container">
+            <div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div><h3>Headquarters</h3><p>Shenzhen, China</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div><h3>Hotline</h3><p>+86 173 7973 1828</p></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div><h3>Email</h3><p>sales@wujisoar.com</p></div>
+                </div>
+            </div>
+            <div class="message-board">
+                <h3 style="margin-bottom: 20px;">📋 Request Full Brochure</h3>
+                <form id="inquiryForm">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" name="name" id="userName" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" name="email" id="userEmail" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number (Optional)</label>
+                        <input type="tel" name="phone" id="userPhone" />
+                    </div>
+                    <div class="form-group">
+                        <label>Message / Interested Products</label>
+                        <textarea name="message" id="userMsg" rows="4" placeholder="Please tell us which products you're interested in, quantity, or any special requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Inquiry →</button>
+                </form>
+                <p style="font-size: 12px; margin-top: 16px; color: #6c86a3;">
+                    ✅ Your inquiry will be sent directly to <strong>sales@wujisoar.com</strong>. We'll reply within 24 hours.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Wuji Soar Global Trading</h3>
+                <p>Premium supply chain for consumer electronics, home appliances &amp; automotive accessories.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#all-categories">All Products</a></p>
+                <p><a href="#featured">Audio Gear</a></p>
+                <p><a href="#contact">Contact Us</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Core Advantages</h3>
+                <p>✓ Logo &amp; Brand Customization</p>
+                <p>✓ Low MOQ &amp; Mixed Batches</p>
+                <p>✓ CE / FCC / RoHS Certified</p>
+                <p>✓ Fast Global Shipping</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 WUJI SOAR GLOBAL TRADING | Digital, Home &amp; Auto Specialist
+        </div>
+    </footer>
+
+    <!-- ===== 产品详情弹窗 ===== -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Product Details</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================================ -->
+    <script>
+        // ================================================================
+        //  1. 图片路径配置
+        //     Digital & Computer     → images/digital/
+        //     Home Appliances        → images/appliance/
+        //     Automotive Supplies    → images/auto/
+        //     Premium Audio Series   → images/Premium Bluetooth Audio Series/
+        // ================================================================
+
+        const DIGITAL_IMAGE_PATH = 'images/digital/';
+        const APPLIANCE_IMAGE_PATH = 'images/appliance/';
+        const AUTO_IMAGE_PATH = 'images/auto/';
+        const AUDIO_IMAGE_PATH = 'images/Premium Bluetooth Audio Series/';
+        const IMAGE_EXTENSION = '.png';
+
+        /**
+         * 将产品名称转换为图片文件名
+         * 规则: 全小写、& → and、空格 → _、移除特殊字符
+         */
+        function productNameToFileName(name) {
+            return name
+                .toLowerCase()
+                .replace(/&/g, 'and')
+                .replace(/[\/\\#,+()$~%.'":*?<>{}]/g, '')
+                .replace(/\s+/g, '_')
+                .replace(/_+/g, '_')
+                .replace(/^_|_$/g, '');
+        }
+
+        /**
+         * 生成完整图片路径
+         */
+        function getProductImage(folder, name) {
+            return `${folder}${productNameToFileName(name)}${IMAGE_EXTENSION}`;
+        }
+
+        // ================================================================
+        //  2. 产品数据
+        // ================================================================
+
+        const digitalItems = [
+            'Smart Watch', 'Data Cable', 'Mini Selfie Stick', 'Tempered Glass', 'Phone Case',
+            'Phone Charger', 'Mouse', 'USB Flash Drive', 'Fitness Band', 'Car Mount Holder', 'Power Adapter', 'Over-Ear Headphone', 'Laptop Support',
+            'Earphones', 'Lazy Phone Stand', 'Power Bank Kit', 'Charger', 'Universal Phone Case'
+        ];
+
+        const applianceItems = [
+            'Yogurt Maker', 'Humidifier', 'Outdoor Speaker', 'Television', 'Steam Iron', 'Water Dispenser', 'LED TV',
+            'Garment Steamer', 'LCD TV', 'Electric Fan', 'Shaver', 'Electric Toothbrush Head', 'Hot Water Faucet',
+            'Portable Media Player', 'Cooktop', 'Bluetooth Speaker', 'Hair Clipper', 'Hair Straightening Brush',
+            'Bluetooth Audio', 'TV Mount', 'Therapy Device'
+        ];
+
+        const autoItems = [
+            'Anti-rust Wax', 'Motorcycle Headlight', 'Static Sticker', 'Reverse Camera', 'Car Ashtray', 'Car Seat Cushion',
+            'Engine Guard', 'GPS Navigation', 'Rearview Mirror', 'Parking Lock', 'Barrier Gate', 'Seat Pad',
+            'Electric Sightseeing Car', 'Windshield Fluid Formula', 'Car Hanging Ornament', 'E-scooter Windshield',
+            'Weather Seal Strip', 'Car Perfume', 'Blind Spot Mirror', 'Wax Container', 'Car Charger'
+        ];
+
+        // 音频产品 (Premium Bluetooth Audio Series) —— 图片已单独指定
+        const speakerProducts = [{
+            name: 'Mini RGB Portable Speaker H18',
+            desc: '360° surround sound, 6-8h playtime, BT6.0, RGB lighting',
+            specs: ['5W Output Power', '1200mAh Battery', '6-8 Hours Playtime', 'Bluetooth V6.0', 'Range ≥10m',
+                'RGB Light Show'
+            ],
+            img: AUDIO_IMAGE_PATH + '1_H18.png'
+        }, {
+            name: 'Magnetic Wireless Charging H11',
+            desc: '15W wireless charging + TWS, BT5.4, compact design',
+            specs: ['15W Wireless Charger', 'TWS Stereo Pairing', '800mAh Battery', 'Bluetooth V5.4', '180g Lightweight',
+                'Magnetic Design'
+            ],
+            img: AUDIO_IMAGE_PATH + '2_H11.png'
+        }, {
+            name: 'Outdoor Karaoke Speaker K100',
+            desc: 'Dual wireless mics, 6.5" subwoofer, party lights',
+            specs: ['2x UHF Wireless Mics', '6.5" Subwoofer', 'RGB Party Lights', 'BT / AUX / USB / TF',
+                'Portable Handle', '1890g'
+            ],
+            img: AUDIO_IMAGE_PATH + '5_K100.png'
+        }, {
+            name: 'IPX4 Waterproof Bass H16',
+            desc: '12.5h battery, TWS pairing, deep bass response',
+            specs: ['IPX4 Waterproof Rating', '12.5 Hours Playtime', 'TWS Function', 'Deep Bass Response', '225g Compact',
+                'Bluetooth V6.0'
+            ],
+            img: AUDIO_IMAGE_PATH + '6_H16.png'
+        }, {
+            name: 'Alarm Clock Wireless H39',
+            desc: 'BT5.4 + alarm + 15W wireless charging, RGB lights',
+            specs: ['Alarm Clock Display', '15W Wireless Charging', 'Bluetooth V5.4', 'TF Card Support', 'RGB Lighting',
+                '385g'
+            ],
+            img: AUDIO_IMAGE_PATH + '4_H39.png'
+        }, {
+            name: 'RGB Light Mic Speaker H14',
+            desc: 'Includes wireless microphone, BT5.4, karaoke ready',
+            specs: ['Wireless Mic Included', 'RGB Colorful Lights', 'Bluetooth V5.4', 'AUX / TF Card', '332g + 68g Mic',
+                'Karaoke Function'
+            ],
+            img: AUDIO_IMAGE_PATH + '7_H14.png'
+        }];
+
+        // ================================================================
+        //  3. 渲染函数
+        // ================================================================
+
+        /** 渲染普通商品网格 (Digital / Appliance / Auto) */
+        function renderGoodsGrid(containerId, items, folder) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = items.map(item => {
+                const imgSrc = getProductImage(folder, item);
+                const escaped = item.replace(/'/g, "\\'");
+                return `
+                    <div class="goods-card" onclick="showProductDetail('${escaped}', '${imgSrc}')">
+                        <div class="product-img-container">
+                            <img src="${imgSrc}" alt="${item}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.png';" />
+                        </div>
+                        <div class="goods-info">
+                            <div class="goods-name">${item}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /** 渲染音频滚动区 */
+        function renderScrollProducts() {
+            const grid = document.getElementById('dynamicProductGrid');
+            if (!grid) return;
+
+            grid.innerHTML = speakerProducts.map(p => {
+                const escapedName = p.name.replace(/'/g, "\\'");
+                const escapedDesc = p.desc.replace(/'/g, "\\'");
+                const specsJson = JSON.stringify(p.specs);
+                return `
+                    <div class="product-card" onclick="showSpeakerDetail('${escapedName}', '${escapedDesc}', ${specsJson}, '${p.img}')">
+                        <div class="product-img">
+                            <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='images/placeholder.png'" />
+                        </div>
+                        <div class="product-info">
+                            <h4>${p.name}</h4>
+                            <p>${p.desc}</p>
+                            <small style="color:#b87c00;">✔ OEM / Logo Customizable</small>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ================================================================
+        //  4. 弹窗逻辑
+        // ================================================================
+
+        /** 普通产品详情 */
+        window.showProductDetail = function(name, imgSrc) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-img">
+                    <img src="${imgSrc}" alt="${name}" onerror="this.src='images/placeholder.png'" />
+                </div>
+                <p style="margin-bottom:16px;">High-quality <strong>${name}</strong> designed for modern lifestyle. Perfect for wholesale, retail, and distribution.</p>
+                <ul class="spec-list">
+                    <li>✓ Premium Quality Materials</li>
+                    <li>✓ OEM / ODM Customization Available</li>
+                    <li>✓ CE, FCC, RoHS Certified</li>
+                    <li>✓ Global Fast Shipping</li>
+                    <li>✓ 1 Year Warranty</li>
+                </ul>
+                <button class="inquiry-link" onclick="closeModalAndInquiry('${name.replace(/'/g, "\\'")}')">📧 Request Quote for ${name}</button>
+            `;
+            document.getElementById('productModal').style.display = 'flex';
+        };
+
+        /** 音频产品详情 */
+        window.showSpeakerDetail = function(name, desc, specs, imgPath) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-img">
+                    <img src="${imgPath}" alt="${name}" onerror="this.src='images/placeholder.png'" />
+                </div>
+                <p style="margin-bottom:16px;">${desc}</p>
+                <ul class="spec-list">
+                    ${specs.map(s => `<li>✓ ${s}</li>`).join('')}
+                </ul>
+                <button class="inquiry-link" onclick="closeModalAndInquiry('${name.replace(/'/g, "\\'")}')">🎤 Request Quote for ${name}</button>
+            `;
+            document.getElementById('productModal').style.display = 'flex';
+        };
+
+        /** 关闭弹窗并跳转到询盘表单 */
+        window.closeModalAndInquiry = function(productName) {
+            document.getElementById('productModal').style.display = 'none';
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            const msgBox = document.getElementById('userMsg');
+            if (msgBox) {
+                msgBox.value =
+                `I am interested in ${productName}. Please send me pricing, MOQ, and customization details.`;
+            }
+        };
+
+        // ================================================================
+        //  5. Toast 通知
+        // ================================================================
+
+        function showToast(message, isError = false) {
+            const old = document.querySelector('.toast');
+            if (old) old.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${isError ? 'error' : ''}`;
+            toast.innerHTML = isError ? `❌ ${message}` : `✅ ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 5000);
+        }
+
+        // ================================================================
+        //  6. 表单提交 (FormSubmit.co)
+        // ================================================================
+
+        const form = document.getElementById('inquiryForm');
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('userName')?.value.trim();
+                const email = document.getElementById('userEmail')?.value.trim();
+                const phone = document.getElementById('userPhone')?.value.trim();
+                const message = document.getElementById('userMsg')?.value.trim() || 'No specific product mentioned';
+
+                if (!name || !email) {
+                    showToast('Please fill in your name and email', true);
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                const fd = new FormData();
+                fd.append('name', name);
+                fd.append('email', email);
+                fd.append('phone', phone);
+                fd.append('message', message);
+                fd.append('_subject', `📧 New Inquiry from ${name} - Wuji Soar Website`);
+                fd.append('_replyto', email);
+                fd.append('_captcha', 'false');
+
+                try {
+                    const resp = await fetch('https://formsubmit.co/ajax/sales@wujisoar.com', {
+                        method: 'POST',
+                        body: fd
+                    });
+                    if (resp.ok) {
+                        showToast(
+                            `Thank you ${name}! Your inquiry has been sent to sales@wujisoar.com. We'll reply within 24 hours.`
+                            );
+                        form.reset();
+                    } else {
+                        throw new Error('Server error');
+                    }
+                } catch (_) {
+                    showToast('Failed to send. Please email us directly at sales@wujisoar.com', true);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            });
+        }
+
+        // ================================================================
+        //  7. 弹窗关闭
+        // ================================================================
+
+        const modal = document.getElementById('productModal');
+        document.querySelector('.close-modal').onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+        // ================================================================
+        //  8. 音频滚动控制 + 自动轮播
+        // ================================================================
+
+        const grid = document.querySelector('.products-grid');
+        const leftBtn = document.getElementById('leftScrollBtn');
+        const rightBtn = document.getElementById('rightScrollBtn');
+
+        if (grid && leftBtn && rightBtn) {
+            leftBtn.addEventListener('click', () => grid.scrollBy({ left: -320, behavior: 'smooth' }));
+            rightBtn.addEventListener('click', () => grid.scrollBy({ left: 320, behavior: 'smooth' }));
+
+            let autoSlide = setInterval(() => {
+                if (grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 10) {
+                    grid.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    grid.scrollBy({ left: 320, behavior: 'smooth' });
+                }
+            }, 5000);
+
+            grid.addEventListener('mouseenter', () => clearInterval(autoSlide));
+            grid.addEventListener('mouseleave', () => {
+                autoSlide = setInterval(() => {
+                    if (grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 10) {
+                        grid.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        grid.scrollBy({ left: 320, behavior: 'smooth' });
+                    }
+                }, 5000);
+            });
+        }
+
+        // ================================================================
+        //  9. 平滑滚动锚点
+        // ================================================================
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ================================================================
+        //  10. 启动渲染
+        // ================================================================
+
+        renderGoodsGrid('digital-goods', digitalItems, DIGITAL_IMAGE_PATH);
+        renderGoodsGrid('appliance-goods', applianceItems, APPLIANCE_IMAGE_PATH);
+        renderGoodsGrid('auto-goods', autoItems, AUTO_IMAGE_PATH);
+        renderScrollProducts();
+
+        // 控制台输出图片路径对照表（方便检查）
+        console.log('📁 图片文件夹结构：');
+        console.log('  Digital & Computer  → ' + DIGITAL_IMAGE_PATH);
+        console.log('  Home Appliances     → ' + APPLIANCE_IMAGE_PATH);
+        console.log('  Automotive Supplies → ' + AUTO_IMAGE_PATH);
+        console.log('  Premium Audio       → ' + AUDIO_IMAGE_PATH);
+        console.log('\n📄 文件名规则：全小写 + 下划线 + .png');
+        console.log('  例: "Smart Watch" → smart_watch.png');
+    </script>
+
+</body>
+</html>
