@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <link rel="icon" type="image/png" href="images/wuji.png">
+    <link rel="icon" type="image/png" href="images/Tab-logo.png">
     <title>Wuji Soar - Digital, Home Appliance & Auto Supplies</title>
 
     <style>
@@ -34,41 +34,83 @@
         .header-top {
             max-width: 1400px;
             margin: auto;
-            padding: 16px 5%;
+            padding: 14px 5%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px 20px;
         }
 
-        .logo {
-            font-size: 28px;
+        /* ---- 左侧品牌文字 ---- */
+        .header-left {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            flex-wrap: wrap;
+            flex: 0 0 auto;
+        }
+        .header-left .brand {
+            font-size: 26px;
             font-weight: 800;
-            color: white;
-            letter-spacing: 1px;
+            color: #fff;
+            letter-spacing: 0.5px;
         }
-        .logo span {
-            color: #ffc107;
+        .header-left .sub {
+            font-size: 0.75em;
             font-weight: 600;
+            color: #ffc107;
+            letter-spacing: 0.3px;
         }
 
-        nav ul {
+        /* ---- 中间 Logo（居中） ---- */
+        .header-center {
+            flex: 1 1 auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header-center a {
+            display: inline-block;
+            line-height: 0;
+        }
+        .logo-img {
+            height: 44px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+            transition: transform 0.25s ease;
+            border-radius: 4px;
+        }
+        .logo-img:hover {
+            transform: scale(1.04);
+        }
+
+        /* ---- 右侧导航 ---- */
+        .header-right {
+            flex: 0 0 auto;
+        }
+        .header-right ul {
             display: flex;
             list-style: none;
             gap: 28px;
             flex-wrap: wrap;
+            justify-content: flex-end;
         }
-        nav a {
+        .header-right a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: 0.2s;
             font-size: 1rem;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
         }
-        nav a:hover {
+        .header-right a:hover {
             color: #ffc107;
-            transform: translateY(-2px);
+            border-bottom-color: #ffc107;
+            transform: translateY(-1px);
         }
 
         /* ===== Hero ===== */
@@ -538,6 +580,64 @@
                 bottom: 20px;
                 text-align: center;
             }
+
+            /* 移动端头部调整 */
+            .header-top {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px 15px;
+            }
+            .header-left {
+                flex: 0 0 auto;
+            }
+            .header-center {
+                flex: 0 0 auto;
+                order: 0;
+            }
+            .header-right {
+                flex: 1 1 100%;
+                order: 1;
+                text-align: center;
+            }
+            .header-right ul {
+                justify-content: center;
+            }
+            .header-left .brand {
+                font-size: 20px;
+            }
+            .header-left .sub {
+                font-size: 0.7em;
+            }
+            .logo-img {
+                height: 34px;
+                max-width: 120px;
+            }
+            .header-right ul {
+                gap: 16px;
+            }
+            .header-right a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-left .brand {
+                font-size: 17px;
+            }
+            .header-left .sub {
+                font-size: 0.65em;
+            }
+            .logo-img {
+                height: 28px;
+                max-width: 90px;
+            }
+            .header-right ul {
+                gap: 12px;
+            }
+            .header-right a {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -547,8 +647,26 @@
     <!-- ===== HEADER ===== -->
     <header>
         <div class="header-top">
-            <div class="logo">Wuji Soar <span> Trading Workshop</span></div>
-            <nav>
+            <!-- 左侧品牌文字（原位置） -->
+            <div class="header-left">
+                <span class="brand">Wuji Soar</span>
+                <span class="sub">Trading Workshop</span>
+            </div>
+
+            <!-- 中间 Logo（居中） -->
+            <div class="header-center">
+                <a href="#home" aria-label="Wuji Soar Home">
+                    <img
+                    src="images/logo.png"
+                    alt="Wuji Soar Logo"
+                    class="logo-img"
+                    onerror="this.style.display='none'"
+                    />
+                </a>
+            </div>
+
+            <!-- 右侧导航（原位置） -->
+            <nav class="header-right">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#all-categories">Products</a></li>
@@ -700,7 +818,7 @@
         //     Digital & Computer     → images/digital/
         //     Home Appliances        → images/appliance/
         //     Automotive Supplies    → images/auto/
-        //     Premium Audio Series   → images/Premium Bluetooth Audio Series/
+        //     Premium Bluetooth Audio Series   → images/Premium Bluetooth Audio Series/
         // ================================================================
 
         const DIGITAL_IMAGE_PATH = 'images/digital/';
@@ -750,7 +868,7 @@
         const autoItems = [
             'Motorcycle Headlight', 'Static Sticker', 'Reverse Camera', 'Car Ashtray', 'Car Seat Cushion',
             'Engine Guard', 'Rearview Mirror', 'Steering Wheel Lock',
-            'Car Hanging Ornament', 
+            'Car Hanging Ornament',
             'Seal Strip', 'Car Perfume', 'Blind Spot Mirror', 'Car Wax',
         ];
 
@@ -812,15 +930,15 @@
                 const imgSrc = getProductImage(folder, item);
                 const escaped = item.replace(/'/g, "\\'");
                 return `
-                    <div class="goods-card" onclick="showProductDetail('${escaped}', '${imgSrc}')">
-                        <div class="product-img-container">
-                            <img src="${imgSrc}" alt="${item}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.png';" />
+                        <div class="goods-card" onclick="showProductDetail('${escaped}', '${imgSrc}')">
+                            <div class="product-img-container">
+                                <img src="${imgSrc}" alt="${item}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.png';" />
+                            </div>
+                            <div class="goods-info">
+                                <div class="goods-name">${item}</div>
+                            </div>
                         </div>
-                        <div class="goods-info">
-                            <div class="goods-name">${item}</div>
-                        </div>
-                    </div>
-                `;
+                    `;
             }).join('');
         }
 
@@ -834,17 +952,17 @@
                 const escapedDesc = p.desc.replace(/'/g, "\\'");
                 const specsJson = JSON.stringify(p.specs);
                 return `
-                    <div class="product-card" onclick="showSpeakerDetail('${escapedName}', '${escapedDesc}', ${specsJson}, '${p.img}')">
-                        <div class="product-img">
-                            <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='images/placeholder.png'" />
+                        <div class="product-card" onclick="showSpeakerDetail('${escapedName}', '${escapedDesc}', ${specsJson}, '${p.img}')">
+                            <div class="product-img">
+                                <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='images/placeholder.png'" />
+                            </div>
+                            <div class="product-info">
+                                <h4>${p.name}</h4>
+                                <p>${p.desc}</p>
+                                <small style="color:#b87c00;">✔ OEM / Logo Customizable</small>
+                            </div>
                         </div>
-                        <div class="product-info">
-                            <h4>${p.name}</h4>
-                            <p>${p.desc}</p>
-                            <small style="color:#b87c00;">✔ OEM / Logo Customizable</small>
-                        </div>
-                    </div>
-                `;
+                    `;
             }).join('');
         }
 
@@ -856,19 +974,19 @@
         window.showProductDetail = function(name, imgSrc) {
             document.getElementById('modalTitle').innerText = name;
             document.getElementById('modalBody').innerHTML = `
-                <div class="detail-img">
-                    <img src="${imgSrc}" alt="${name}" onerror="this.src='images/placeholder.png'" />
-                </div>
-                <p style="margin-bottom:16px;">High-quality <strong>${name}</strong> designed for modern lifestyle. Perfect for wholesale, retail, and distribution.</p>
-                <ul class="spec-list">
-                    <li>✓ Premium Quality Materials</li>
-                    <li>✓ OEM / ODM Customization Available</li>
-                    <li>✓ CE, FCC, RoHS Certified</li>
-                    <li>✓ Global Fast Shipping</li>
-                    <li>✓ 1 Year Warranty</li>
-                </ul>
-                <button class="inquiry-link" onclick="closeModalAndInquiry('${name.replace(/'/g, "\\'")}')">📧 Request Quote for ${name}</button>
-            `;
+                    <div class="detail-img">
+                        <img src="${imgSrc}" alt="${name}" onerror="this.src='images/placeholder.png'" />
+                    </div>
+                    <p style="margin-bottom:16px;">High-quality <strong>${name}</strong> designed for modern lifestyle. Perfect for wholesale, retail, and distribution.</p>
+                    <ul class="spec-list">
+                        <li>✓ Premium Quality Materials</li>
+                        <li>✓ OEM / ODM Customization Available</li>
+                        <li>✓ CE, FCC, RoHS Certified</li>
+                        <li>✓ Global Fast Shipping</li>
+                        <li>✓ 1 Year Warranty</li>
+                    </ul>
+                    <button class="inquiry-link" onclick="closeModalAndInquiry('${name.replace(/'/g, "\\'")}')">📧 Request Quote for ${name}</button>
+                `;
             document.getElementById('productModal').style.display = 'flex';
         };
 
@@ -876,15 +994,15 @@
         window.showSpeakerDetail = function(name, desc, specs, imgPath) {
             document.getElementById('modalTitle').innerText = name;
             document.getElementById('modalBody').innerHTML = `
-                <div class="detail-img">
-                    <img src="${imgPath}" alt="${name}" onerror="this.src='images/placeholder.png'" />
-                </div>
-                <p style="margin-bottom:16px;">${desc}</p>
-                <ul class="spec-list">
-                    ${specs.map(s => `<li>✓ ${s}</li>`).join('')}
-                </ul>
-                <button class="inquiry-link" onclick="closeModalAndInquiry('${name.replace(/'/g, "\\'")}')">🎤 Request Quote for ${name}</button>
-            `;
+                    <div class="detail-img">
+                        <img src="${imgPath}" alt="${name}" onerror="this.src='images/placeholder.png'" />
+                    </div>
+                    <p style="margin-bottom:16px;">${desc}</p>
+                    <ul class="spec-list">
+                        ${specs.map(s => `<li>✓ ${s}</li>`).join('')}
+                    </ul>
+                    <button class="inquiry-link" onclick="closeModalAndInquiry('${name.replace(/'/g, "\\'")}')">🎤 Request Quote for ${name}</button>
+                `;
             document.getElementById('productModal').style.display = 'flex';
         };
 
@@ -895,7 +1013,7 @@
             const msgBox = document.getElementById('userMsg');
             if (msgBox) {
                 msgBox.value =
-                `I am interested in ${productName}. Please send me pricing, MOQ, and customization details.`;
+                    `I am interested in ${productName}. Please send me pricing, MOQ, and customization details.`;
             }
         };
 
@@ -955,7 +1073,7 @@
                     if (resp.ok) {
                         showToast(
                             `Thank you ${name}! Your inquiry has been sent to sales@wujisoar.com. We'll reply within 24 hours.`
-                            );
+                        );
                         form.reset();
                     } else {
                         throw new Error('Server error');
@@ -1042,6 +1160,7 @@
         console.log('  Premium Audio       → ' + AUDIO_IMAGE_PATH);
         console.log('\n📄 文件名规则：全小写 + 下划线 + .png');
         console.log('  例: "Smart Watch" → smart_watch.png');
+        console.log('\n🖼️ 公司 Logo: images/logo.png (请将您的 PNG Logo 放入 images 文件夹)');
     </script>
 
 </body>
